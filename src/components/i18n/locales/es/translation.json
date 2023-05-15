@@ -1,0 +1,13 @@
+{
+    "inicio-de-sesion":"Inicio de sesión",
+    "ver-perfil":"Area personal",
+    "adminLogin.title":"Inicio de sesión de adminitrador",
+    "adminLogin.backButton":"Ir a home",
+    "adminLogin.emailLabel":"Correo electronico",
+    "adminLogin.passwordLabel":"Contraseña",
+    "adminLogin.loginButton":"Iniciar sesiñón",
+    "adminLogin.errorMessage":"Error de inicio de sesión",
+    "adminDashboard.title":"Panel de control",
+    "adminDashboard.listUsers":"Listar usuarios",
+    "adminDashboard.logout":"Cerrar sesión"
+}
