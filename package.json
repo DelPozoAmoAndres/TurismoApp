@@ -24,7 +24,6 @@
     "i18next-browser-languagedetector": "^7.0.1",
     "ionicons": "^7.0.0",
     "jwt-decode": "^3.1.2",
-    "react": "^18.2.0",
     "react-calendar": "^4.2.1",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.2.2",
@@ -68,6 +67,8 @@
   ],
   "description": "An Ionic project",
   "devDependencies": {
-    "@capacitor/cli": "5.0.3"
+    "@capacitor/cli": "5.0.3",
+    "ionic": "^5.4.16",
+    "react": "^18.2.0"
   }
 }
