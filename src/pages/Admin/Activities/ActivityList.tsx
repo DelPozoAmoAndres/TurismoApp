@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, IonSearchbar, IonButton, IonSelect, IonSelectOption, IonInput } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
-import { searchValidation } from '../../../shared/Validations';
+import { searchValidation } from '../../../Utils/Validations';
 import { Activity, ActivityFilter, ActivityState } from '../../../models/Activity';
 import { getActivityList } from '../../../apis/activityApi';
 
 const ActivityList: React.FC<RouteComponentProps> = ({ history }) => {
   const [activities, setActivities] = useState<Activity[]>([]);
-  const [filters, setFilters] = useState<ActivityFilter>({ duration: null, petsPermited: null, state:null });
+  const [filters, setFilters] = useState<ActivityFilter>({ precio:null,duration: null, petsPermited: null, state:null });
   const [searchText, setSearchText] = useState<string>('a');
 
   // Aquí deberías obtener la lista de usuarios desde tu fuente de datos

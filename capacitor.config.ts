@@ -6,10 +6,11 @@ const config: CapacitorConfig = {
   webDir: 'build',
   server: {
     cleartext: true, // Necesario para permitir conexiones HTTP en Android 9 y superiores
-    androidScheme:"http"
+    androidScheme:"http",
   },
   android: {
     allowMixedContent: true, // Necesario para permitir conexiones HTTP en Android 9 y superiores
+
   },
   ios: {
 

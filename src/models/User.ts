@@ -1,3 +1,5 @@
+import { Activity } from "./Activity";
+
 export interface User {
     name: string;
     email: string;
@@ -8,6 +10,14 @@ export interface User {
     role?: Role;
     createdAt?: Date;
     updatedAt?: Date;
+    schedules?:Schedule[];
+    _id?:string;
+}
+
+export interface Schedule {
+    name:string,
+    activities:Activity[]
+
 }
 
 export interface FieldConfig {

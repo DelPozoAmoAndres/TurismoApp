@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { IonPage, IonContent, IonButton, IonHeader, IonToolbar, IonTitle, IonList, IonItem, IonInput, IonAlert, IonCheckbox } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
 import { deleteActivity, editActivity, getActivity } from '../../../apis/activityApi';
-import { Activity } from '../../../models/Activity';
+import { Activity} from '../../../models/Activity';
+import AddEvent from './Events/CreateEvent';
 
 interface ActivityDetailsProps extends RouteComponentProps<{ id: string }> { }
 
@@ -70,9 +71,9 @@ const ActivityDetails: React.FC<ActivityDetailsProps> = ({ match, history }) => 
                     <IonItem disabled={!isEditModeActive}>
                         <IonCheckbox checked={formData?.petsPermited} value={formData?.petsPermited===false}  labelPlacement='start' onIonChange={e => formData && setFormData({...formData, petsPermited: Boolean(e.detail.value!)})}>Mascotas permitidas</IonCheckbox>
                     </IonItem>
-                    <IonItem disabled={!isEditModeActive}>
-                        <IonInput  value={formData?.state!} label="Estado" labelPlacement='stacked' onIonChange={e => formData && setFormData({...formData, state: Number(e.detail.value!)})}></IonInput>
-                    </IonItem>
+                    {/* <IonItem disabled={!isEditModeActive}>
+                        <IonInput  value={formData?.state!} label="Estado" labelPlacement='stacked' onIonChange={e => formData && setFormData({...formData, state: ActivityState[e.detail.value]})}></IonInput>
+                    </IonItem> */}
                     {(isEditModeActive) ?
                         <IonButton expand="block" onClick={guardarCambios}>Guardar cambios</IonButton>
                         :
@@ -103,6 +104,7 @@ const ActivityDetails: React.FC<ActivityDetailsProps> = ({ match, history }) => 
                         },
                     ]}
                 />
+                <AddEvent activityId={match.params.id} />
             </IonContent>
         </IonPage>
     );

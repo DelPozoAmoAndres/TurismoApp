@@ -1,5 +1,8 @@
+import { User } from "./User";
+
 export interface Activity{
     name:string;
+    images:string[];
     location:string;
     duration:number;
     description:string;
@@ -10,18 +13,21 @@ export interface Activity{
     _id?:string;
 }
 
-export enum ActivityState {"abierta","parada temporalmente","cancelada"}
+export enum ActivityState {"available"="available","temporaly-closed"="temporaly-closed","canceled"="canceled"}
 
 export interface Event{
-    seats: Number; 
-    availableSeats: Number;
+    seats: number; 
+    bookedSeats?: number;
     date: Date;
-    price: Number;
+    price: number;
     language: string;
+    guide: string;
+    _id?:string;
 }
 
 export interface ActivityFilter {
-    duration: Number| null;
-    petsPermited:Boolean | null;
+    precio: number| null;
+    duration: number| null;
+    petsPermited:boolean | null;
     state:ActivityState|null;
 }

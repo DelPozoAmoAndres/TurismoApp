@@ -1,15 +1,15 @@
 import React, { FormEvent, useRef, useState } from 'react';
 import { IonPage, IonContent, IonItem, IonButton, IonAlert, IonHeader, IonToolbar, IonTitle, IonCheckbox } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
-import Spinner from '../../../components/Spinner/Spinner';
-import { Field } from '../../../components/Forms/Field';
-import { lengthValidation } from '../../../shared/Validations';
+import Spinner from '../../../shared/Spinner';
+import { Field } from '../../../shared/Field';
+import { lengthValidation } from '../../../Utils/Validations';
 import { Activity, ActivityState } from '../../../models/Activity';
 import { createActivity } from '../../../apis/activityApi';
 
 
 const CreateActivity: React.FC<RouteComponentProps> = ({ history }) => {
-  const [formData, setFormData] = useState<Activity>({ name: '', description: '', duration: 0, events: null, location: '', petsPermited: false, accesibility: '', state: ActivityState.abierta });
+  const [formData, setFormData] = useState<Activity>({ name: '', description: '', duration: 0, events: null, location: '', petsPermited: false, accesibility: '', state: ActivityState.available, images:[""] });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showAlert, setShowAlert] = useState<boolean>(false);

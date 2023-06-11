@@ -3,6 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { AuthContextType } from '../models/AuthContextType';
 import { User } from '../models/User';
 import { RegisterFormData } from '../models/User';
+import { getItem, removeItem, setItem } from '../Utils/Utils';
 
 export const AuthContext = createContext<AuthContextType>({
   user: null,
@@ -19,7 +20,7 @@ interface Props {
 }
 
 const AuthProvider: React.FC<Props> = (props) => {
-  const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
+  const [token, setToken] = useState<string | null>(getItem("token"));
   const [user, setUser] = useState<User | null>(null);
 
   const register = async (formData: RegisterFormData) => {
@@ -44,12 +45,13 @@ const AuthProvider: React.FC<Props> = (props) => {
   }
 
   const login = async (email: string, password: string) => {
+    if (getItem("i18nextLng") == null) throw new Error("Debes de activar las cookies para poder iniciar sesión")
     return axios.post(process.env.REACT_APP_API_URL + '/login', { email, password })
       .then(response => {
         if (response.status === HttpStatusCode.Ok) {
           setUser(response.data.user);
           setToken(response.data.token)
-          localStorage.setItem('token', response.data.token);
+          setItem('token', response.data.token);
         }
         else
           throw new Error(response.data.message)
@@ -59,29 +61,46 @@ const AuthProvider: React.FC<Props> = (props) => {
         error = error?.response?.data?.message || error.message
         throw new Error(error ?? "Error de inicio de sesión. Por favor, comprueba tus credenciales e inténtalo de nuevo.")
       });
-
   };
 
   const logout = () => {
     setUser(null);
     setToken(null);
-    localStorage.removeItem('token');
+    removeItem('token');
   };
 
+
+
   useEffect(() => {
-    if (token) {
-      axios.get(process.env.REACT_APP_API_URL + '/user').then((response) => {
-        if(!response.data.user)
-          logout();
-        setUser(response.data.user);
-      })
-        .catch((e: any) => {
-          if (e.response && e.response.status === HttpStatusCode.InternalServerError) {
+    const handleToken = () => {
+      const token = getItem("token");
+      setToken(token);
+      if (token) {
+        axios.get(process.env.REACT_APP_API_URL + '/user').then((response) => {
+          if (!response.data.user)
             logout();
-          }
+          setUser(response.data.user);
         })
-    }
+          .catch((e: any) => {
+            if (e.response && e.response.status === HttpStatusCode.Unauthorized) {
+              logout();
+            }
+          })
+      }
+      else {
+        setUser(null)
+      }
+
+    };
+
+    handleToken();
+
+    window.addEventListener('storage', handleToken);
+    return () => {
+      window.removeEventListener('storage', handleToken);
+    };
   }, [token]);
+
 
   return (
     <AuthContext.Provider value={{ user, token, login, logout, register }}>

@@ -4,7 +4,7 @@
     "capacitor": {}
   },
   "type": "react",
-  "id": "com.example.myapp",
+  "id": "com.astour",
   "integrations_enabled": true,
   "capacitor": {
     "appId": "com.astour",
@@ -24,6 +24,7 @@
       "minVersion": "10"
     },
     "android": {
+      "allowMixedContent": true,
       "appId": "com.astour",
       "minVersion": "21"
     }
