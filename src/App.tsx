@@ -1,3 +1,4 @@
+import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 /* Ionic Components */
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
@@ -46,46 +47,38 @@ import { useTheme } from './hooks/useTheme';
 setupIonicReact();
 
 axios.interceptors.request.use(
-  config => {
+  (config) => {
     const token = getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
-  error => Promise.reject(error)
+  (error) => Promise.reject(error)
 );
-
-
 
 const App: React.FC = () => {
   useTheme();
   return (
-
     <I18nextProvider i18n={i18n}>
       <IonApp>
         <IonReactRouter>
           <AppPage>
             <IonRouterOutlet>
-
               <Route exact path="/">
-                {Capacitor.isNativePlatform() ?
-                  <Redirect to="/movil" />
-                  :
-                  <Redirect to='/home' />
-                } 
+                {Capacitor.isNativePlatform() ? <Redirect to="/movil" /> : <Redirect to="/home" />}
               </Route>
               <Route path="/movil" render={() => <TabBar />} />
               <Route exact path="/registro" component={Register} />
               <Route exact path="/home" component={HomePage} />
               <Route exact path="/buscar" component={SearchActivityPage} />
               <Route exact path="/activity/:id" component={ActivityDetailsPage} />
-              <PrivateRoute path="/activity/:id/reservar/" component={ReservationPage} alternativePath='/' />
-              <PrivateRoute exact path="/perfil" component={ProfilePage} alternativePath='/' />
-              <PrivateRoute exact path="/reservas" component={ReservationListPage} alternativePath='/' />
+              <PrivateRoute path="/activity/:id/reservar/" component={ReservationPage} alternativePath="/" />
+              <PrivateRoute exact path="/perfil" component={ProfilePage} alternativePath="/" />
+              <PrivateRoute exact path="/reservas" component={ReservationListPage} alternativePath="/" />
               <Route path="/payment/status" component={ReservationStatusPage} />
               {/* <PrivateRoute exact path="/saved" component={SavedPage} alternativePath='/' /> */}
-              <PrivateRoute exact path="/reservation/:id" component={ReservationDetailsPage} alternativePath='/' />
+              <PrivateRoute exact path="/reservation/:id" component={ReservationDetailsPage} alternativePath="/" />
               <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
               <AdminRoute exact path="/admin/users" component={UserList} />
               <AdminRoute exact path="/admin/user/:id" component={UserProfile} />
@@ -95,7 +88,7 @@ const App: React.FC = () => {
         </IonReactRouter>
       </IonApp>
     </I18nextProvider>
-  )
+  );
 };
 
 export default App;

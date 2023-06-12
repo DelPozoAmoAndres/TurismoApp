@@ -1,31 +1,31 @@
 #activity-list {
-    max-width: 1000px;
-    margin: auto
+  max-width: 1000px;
+  margin: auto;
 }
 
 #activity-list section ion-searchbar {
-    padding: 0;
+  padding: 0;
 }
 
 #activity-list section {
-    padding: 0 20px;
-    position: sticky;
-    top: 0;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    background: var(--background)
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  background: var(--background);
 }
 
 #activity-list ion-list {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-bottom: 40px
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 40px;
 }
 
 #activity-list footer ion-item {
-    position: fixed;
-    bottom: 0px;
-    width: 100%
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }

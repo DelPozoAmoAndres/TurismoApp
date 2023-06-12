@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonButton, IonCard, IonCardContent, IonCardTitle, IonIcon, IonItem, IonLabel, IonNavLink, IonPopover, IonRow, IonSelect, IonSelectOption } from '@ionic/react';
+import { IonButton, IonIcon, IonNavLink, IonSelect, IonSelectOption } from '@ionic/react';
 import { globeOutline } from 'ionicons/icons';
 import { Language } from '../models/Language';
 import i18n from '../components/i18n/i18n';
@@ -9,26 +9,35 @@ import { useScreen } from '../hooks/useScreen';
 
 const LanguageSelector: React.FC = () => {
   const { languages, defaultLanguage } = useLanguage();
-  const [showPopover, setShowPopover] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState(defaultLanguage);
   const { isMobile } = useScreen();
   const handleLanguageChange = async (lang: Language) => {
-    await i18n.changeLanguage(lang.code).then(() => setShowPopover(false))
+    await i18n.changeLanguage(lang.code);
     setSelectedLanguage(lang);
-  }
+  };
 
   return (
     <IonNavLink hidden={isMobile}>
-      <IonButton expand='block' disabled={getItem("i18nextLng") === null}>
+      <IonButton expand="block" disabled={getItem('i18nextLng') === null}>
         <IonIcon slot="start" icon={globeOutline} />
-        <IonSelect style={{ "width": "auto" }} interface="popover" selectedText={selectedLanguage.name} onIonChange={async (e) => { console.log(e.detail); await handleLanguageChange(e.detail.value) }}>
+        <IonSelect
+          style={{ width: 'auto' }}
+          interface="popover"
+          selectedText={selectedLanguage.name}
+          onIonChange={async (e) => {
+            console.log(e.detail);
+            await handleLanguageChange(e.detail.value);
+          }}
+        >
           {languages.map((lang) => (
-            <IonSelectOption key={lang.code} value={lang}>{lang.name}</IonSelectOption>
+            <IonSelectOption key={lang.code} value={lang}>
+              {lang.name}
+            </IonSelectOption>
           ))}
         </IonSelect>
       </IonButton>
     </IonNavLink>
   );
-}
+};
 
 export default LanguageSelector;

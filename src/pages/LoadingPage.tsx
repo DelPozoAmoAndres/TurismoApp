@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IonPage, IonContent, IonSpinner } from '@ionic/react';
+import { IonContent, IonSpinner } from '@ionic/react';
 import { useScreen } from '../hooks/useScreen';
 import { AppPage } from './AppPage';
 
@@ -16,23 +16,23 @@ const LoadingPage: React.FC = () => {
     };
   }, []);
 
-  const content =
+  const content = (
     <IonContent>
       {showSpinner ? (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+          }}
+        >
           <IonSpinner />
         </div>
       ) : null}
     </IonContent>
-  return (
-    !browsingWeb ?
-      <AppPage>
-        {content}
-      </AppPage> :
-      <>
-        {content}
-      </>
   );
+  return !browsingWeb ? <AppPage>{content}</AppPage> : <>{content}</>;
 };
 
 export default LoadingPage;

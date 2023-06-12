@@ -6,10 +6,20 @@ import { Field } from '../../../shared/Field';
 import { lengthValidation } from '../../../Utils/Validations';
 import { Activity, ActivityState } from '../../../models/Activity';
 import { createActivity } from '../../../apis/activityApi';
-
+import { AxiosError } from 'axios';
 
 const CreateActivity: React.FC<RouteComponentProps> = ({ history }) => {
-  const [formData, setFormData] = useState<Activity>({ name: '', description: '', duration: 0, events: null, location: '', petsPermited: false, accesibility: '', state: ActivityState.available, images:[""] });
+  const [formData, setFormData] = useState<Activity>({
+    name: '',
+    description: '',
+    duration: 0,
+    events: null,
+    location: '',
+    petsPermited: false,
+    accesibility: '',
+    state: ActivityState.available,
+    images: [''],
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showAlert, setShowAlert] = useState<boolean>(false);
@@ -21,15 +31,15 @@ const CreateActivity: React.FC<RouteComponentProps> = ({ history }) => {
       setLoading(true);
       setError(null);
       await createActivity(formData);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-      setError(error?.message ?? 'Ha habido un error en el servidor.');
+      if (error instanceof Error || error instanceof AxiosError) setError(error?.message ?? 'Ha habido un error en el servidor.');
     }
     setLoading(false);
     setShowAlert(true);
-  }
+  };
 
-  console.log("Create",formData.petsPermited)
+  console.log('Create', formData.petsPermited);
 
   return (
     <IonPage ref={page}>
@@ -40,74 +50,93 @@ const CreateActivity: React.FC<RouteComponentProps> = ({ history }) => {
       </IonHeader>
       <IonContent>
         <form onSubmit={handleCreateActivity}>
-          <IonItem lines='none'>
+          <IonItem lines="none">
             <Field
-              label='Nombre'
-              errorText='Introduce cadena con mas de 8 caracteres'
-              placeholder='Introduzca un nombre'
-              type='text'
-              onIonInput={e => setFormData({ ...formData, name: e.detail.value! })}
-              validationFn={e => lengthValidation(8, e)}
+              label="Nombre"
+              errorText="Introduce cadena con mas de 8 caracteres"
+              placeholder="Introduzca un nombre"
+              type="text"
+              onIonInput={(e) => setFormData({ ...formData, name: e.detail.value })}
+              validationFn={(e) => lengthValidation(8, e)}
               value={formData.name}
             />
           </IonItem>
-          <IonItem lines='none'>
+          <IonItem lines="none">
             <Field
-              label='Descripción'
-              errorText='Introduzca una cadena con más de 20 caracteres'
-              placeholder='Introduzca una descripcion'
-              type='text'
-              onIonInput={e => setFormData({ ...formData, description: e.detail.value! })}
+              label="Descripción"
+              errorText="Introduzca una cadena con más de 20 caracteres"
+              placeholder="Introduzca una descripcion"
+              type="text"
+              onIonInput={(e) => setFormData({ ...formData, description: e.detail.value })}
               validationFn={() => true}
               value={formData.description}
             />
           </IonItem>
-          <IonItem lines='none'>
+          <IonItem lines="none">
             <Field
-              label='Duración (minutos)'
-              errorText='Introduzca una duración mayor de 0'
-              placeholder='Introduzca una duración'
-              type='number'
-              onIonInput={e => setFormData({ ...formData, duration: Number(e.detail.value!) })}
+              label="Duración (minutos)"
+              errorText="Introduzca una duración mayor de 0"
+              placeholder="Introduzca una duración"
+              type="number"
+              onIonInput={(e) => setFormData({ ...formData, duration: Number(e.detail.value) })}
               validationFn={() => true}
               value={String(formData.duration)}
             />
           </IonItem>
-          <IonItem lines='none'>
+          <IonItem lines="none">
             <Field
-              label='Ubicación'
-              errorText='Introduzca una cadena de más de 8 caracteres'
-              placeholder='Introduzca la ubicación de la actividad'
+              label="Ubicación"
+              errorText="Introduzca una cadena de más de 8 caracteres"
+              placeholder="Introduzca la ubicación de la actividad"
               validationFn={() => true}
-              type='text'
-              onIonInput={e => { setFormData({ ...formData, location: e.detail.value! }) }}
-              value={formData.location!}
+              type="text"
+              onIonInput={(e) => {
+                setFormData({ ...formData, location: e.detail.value });
+              }}
+              value={formData.location}
             />
           </IonItem>
-          <IonItem lines='none'>
-          <IonCheckbox checked={formData?.petsPermited} value={formData?.petsPermited===false}  labelPlacement='start' onIonChange={e => formData && setFormData({...formData, petsPermited: Boolean(e.detail.value!)})}>Mascotas permitidas</IonCheckbox>
+          <IonItem lines="none">
+            <IonCheckbox
+              checked={formData?.petsPermited}
+              value={formData?.petsPermited === false}
+              labelPlacement="start"
+              onIonChange={(e) =>
+                formData &&
+                setFormData({
+                  ...formData,
+                  petsPermited: Boolean(e.detail.value),
+                })
+              }
+            >
+              Mascotas permitidas
+            </IonCheckbox>
           </IonItem>
 
-          <IonItem lines='none'>
+          <IonItem lines="none">
             <Field
-              label='Accesibilidad'
-              errorText='Introduzca una cadena de más de 8 caracteres'
-              placeholder='Introduzca una descripción de como es la accesibilidad'
+              label="Accesibilidad"
+              errorText="Introduzca una cadena de más de 8 caracteres"
+              placeholder="Introduzca una descripción de como es la accesibilidad"
               validationFn={() => true}
-              type='text'
-              onIonInput={e => { setFormData({ ...formData, accesibility: e.detail.value! }) }}
+              type="text"
+              onIonInput={(e) => {
+                setFormData({ ...formData, accesibility: e.detail.value });
+              }}
               value={formData.accesibility}
             />
           </IonItem>
-          <IonItem lines='none'>
+          <IonItem lines="none">
             <Field
-              label='Estado de la actividad'
-              errorText='Esta contraseña no coincide con la del campo anterior'
-              placeholder='Introduzca la misma contraseña'
+              label="Estado de la actividad"
+              errorText="Esta contraseña no coincide con la del campo anterior"
+              placeholder="Introduzca la misma contraseña"
               validationFn={() => true}
-              type='text'
-              onIonInput={e => { setFormData({ ...formData, state: e.detail.value! }) }}
-              value={String(formData.state!)}
+              type="text"
+              onIonInput={(e) => {
+                setFormData({ ...formData, state: e.detail.value });
+              }}
+              value={String(formData.state)}
             />
           </IonItem>
           <IonButton type="submit" expand="block">
@@ -116,15 +145,17 @@ const CreateActivity: React.FC<RouteComponentProps> = ({ history }) => {
         </form>
         <IonAlert
           isOpen={showAlert}
-          onDidDismiss={() => { setShowAlert(false); error ?? history.push("/admin/dashboard") }}
-          header={error ? "Error" : "Actividad creada"}
-          message={error ?? "La actividad ha sido registrada correctamente"}
+          onDidDismiss={() => {
+            setShowAlert(false);
+            error ?? history.push('/admin/dashboard');
+          }}
+          header={error ? 'Error' : 'Actividad creada'}
+          message={error ?? 'La actividad ha sido registrada correctamente'}
           buttons={['OK']}
         />
-
       </IonContent>
     </IonPage>
   );
-}
+};
 
 export default CreateActivity;

@@ -1,33 +1,47 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { IonPage, IonContent, IonHeader, IonToolbar, IonButtons, IonTitle, IonIcon, IonInput, IonItem, IonLabel, IonButton, IonText, IonAlert } from '@ionic/react';
+import {
+  IonPage,
+  IonContent,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonTitle,
+  IonIcon,
+  IonInput,
+  IonItem,
+  IonLabel,
+  IonButton,
+  IonAlert,
+} from '@ionic/react';
 import { person, lockClosed } from 'ionicons/icons';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContexts';
+import { AxiosError } from 'axios';
 
 const AdminLogin: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [errorMessage, setErrorMessage] = useState<string|null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [showAlert, setShowAlert] = useState<boolean>(false);
-  const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const history = useHistory();
 
-  const auth = useAuth()
+  const auth = useAuth();
 
   const handleLogin = async () => {
-    setErrorMessage(null)
-    setLoading(true)
+    setErrorMessage(null);
+    setLoading(true);
     try {
       await auth.login(email, password);
       //history.push('/admin/dashboard');
-    } catch (error:any) {
-      console.error(error)
-      setErrorMessage(error?.message ?? t('adminLogin.errorMessage')!);
+    } catch (error: unknown) {
+      console.error(error);
+      if (error instanceof Error || error instanceof AxiosError) setErrorMessage(error?.message ?? t('adminLogin.errorMessage'));
     }
-    setShowAlert(true)
-    setLoading(false)
+    setShowAlert(true);
+    setLoading(false);
   };
 
   return (
@@ -48,20 +62,25 @@ const AdminLogin: React.FC = () => {
           <IonItem>
             <IonIcon icon={person} slot="start" />
             <IonLabel position="floating">{t('adminLogin.emailLabel')}</IonLabel>
-            <IonInput type="email" value={email} onIonChange={e => setEmail(e.detail.value!)} />
+            <IonInput type="email" value={email} onIonChange={(e) => setEmail(e.detail.value || '')} />
           </IonItem>
           <IonItem>
             <IonIcon icon={lockClosed} slot="start" />
             <IonLabel position="floating">{t('adminLogin.passwordLabel')}</IonLabel>
-            <IonInput type="password" value={password} onIonChange={e => setPassword(e.detail.value!)} />
+            <IonInput type="password" value={password} onIonChange={(e) => setPassword(e.detail.value || '')} />
           </IonItem>
-          <IonButton expand="block" onClick={handleLogin}>{t('adminLogin.loginButton')}</IonButton>
+          <IonButton expand="block" onClick={handleLogin}>
+            {loading ? t('loading') : t('adminLogin.loginButton')}
+          </IonButton>
         </div>
         <IonAlert
           isOpen={showAlert}
-          onDidDismiss={() => { setShowAlert(false); errorMessage ?? history.push("/admin/dashboard") }}
-          header={errorMessage ? "Error" : "Inicio de sesión"}
-          message={errorMessage ?? "Se ha iniciado sesión correctamente"}
+          onDidDismiss={() => {
+            setShowAlert(false);
+            errorMessage ?? history.push('/admin/dashboard');
+          }}
+          header={errorMessage ? 'Error' : 'Inicio de sesión'}
+          message={errorMessage ?? 'Se ha iniciado sesión correctamente'}
           buttons={['OK']}
         />
       </IonContent>

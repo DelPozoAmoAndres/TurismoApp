@@ -3,11 +3,13 @@ import { ReservationGroup } from '../models/Reservation';
 import { getReservationList } from '../apis/reservationApi';
 
 export const useReservationList = () => {
-    const [reservationsGroup, setReservationsGroup] = useState<ReservationGroup[]>([]);
+  const [reservationsGroup, setReservationsGroup] = useState<ReservationGroup[]>([]);
 
-    useEffect(() => {
-        getReservationList().then((data) => {setReservationsGroup(data)})
-    }, []);
+  useEffect(() => {
+    getReservationList().then((data) => {
+      setReservationsGroup(data);
+    });
+  }, []);
 
-    return reservationsGroup;
-}
+  return reservationsGroup;
+};

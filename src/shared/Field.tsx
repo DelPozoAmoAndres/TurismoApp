@@ -5,19 +5,19 @@ import { useLanguage } from '../hooks/useLanguage';
 interface FieldProps {
   value: string;
   label: string;
-  type: any;
+  type: typeof IonInput.prototype.defaultProps.type;
   placeholder: string;
-  errorText:string;
-  labelPlacement?:any;
+  errorText: string;
+  labelPlacement?: typeof IonInput.prototype.defaultProps.labelPlacement;
   validationFn: (value: string) => boolean;
-  onIonInput:(value:any) => void;
+  onIonInput: (value: CustomEvent) => void;
 }
 
-export const Field: React.FC<FieldProps> = ({ value, errorText,label, type, placeholder, labelPlacement, validationFn, onIonInput }) => {
+export const Field: React.FC<FieldProps> = ({ value, errorText, label, type, placeholder, labelPlacement, validationFn, onIonInput }) => {
   const [isValid, setIsValid] = useState<boolean | undefined>();
   const [isTouched, setIsTouched] = useState(false);
 
-  const validate = (ev: any) => {
+  const validate = (ev: CustomEvent) => {
     const fieldValue = ev.detail.value;
 
     setIsValid(undefined);
@@ -26,25 +26,25 @@ export const Field: React.FC<FieldProps> = ({ value, errorText,label, type, plac
 
     const isValidValue = validationFn(fieldValue);
     setIsValid(isValidValue);
-    
   };
 
   const markTouched = () => {
     setIsTouched(true);
-  };  
-
-  const {defaultLanguage} = useLanguage();
+  };
 
   return (
     <IonInput
       className={`${isValid && 'ion-valid'} ${isValid === false && 'ion-invalid'} ${isTouched && 'ion-touched'}`}
       type={type}
-      labelPlacement={labelPlacement ?? "floating"}
+      labelPlacement={labelPlacement ?? 'floating'}
       label={label}
       value={value}
       placeholder={placeholder}
       errorText={errorText}
-      onIonInput={(event) => {validate(event);onIonInput(event)}}
+      onIonInput={(event) => {
+        validate(event);
+        onIonInput(event);
+      }}
       onIonBlur={() => markTouched()}
     ></IonInput>
   );

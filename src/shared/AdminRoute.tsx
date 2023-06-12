@@ -1,3 +1,4 @@
+import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContexts';
 import LoadingPage from '../pages/LoadingPage';
@@ -14,7 +15,21 @@ const AdminRoute: React.FC<AdminRouteProps> = ({ component: Component, ...rest }
   return (
     <Route
       {...rest}
-      render={(props) => (auth.token ? ( auth.user ? auth.user?.role===Role.administrador ? <Component {...props} /> :<Redirect to="/" />: <LoadingPage />) :<Redirect to="/" /> )}
+      render={(props) =>
+        auth.token ? (
+          auth.user ? (
+            auth.user?.role === Role.administrador ? (
+              <Component {...props} />
+            ) : (
+              <Redirect to="/" />
+            )
+          ) : (
+            <LoadingPage />
+          )
+        ) : (
+          <Redirect to="/" />
+        )
+      }
     />
   );
 };

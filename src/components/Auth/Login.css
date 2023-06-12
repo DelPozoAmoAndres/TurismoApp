@@ -3,15 +3,15 @@
   align-self: flex-start;
   display: flex;
   gap: 39px;
-
 }
 
-@media only screen and (min-width: 650px) {
-  #login-modal-card{
+@media only screen and (width>= 650px) {
+  #login-modal-card {
     --width: 600px;
     --height: 493px;
     --border-radius: 6px;
-    background-color: rgb(0, 0, 0, 0.6);
+
+    background-color: rgb(0 0 0 60%);
   }
 
   #social-buttons ion-list {
@@ -21,7 +21,6 @@
   #social-buttons ion-list ion-button {
     width: 30%;
   }
-
 }
 
 .custom-alert {
@@ -31,26 +30,22 @@
 
 #login-grid {
   width: 95%;
-  margin: 0 2.5%
-}
-#login-grid div { 
-  display: flex; 
-  justify-content: space-between 
+  margin: 0 2.5%;
 }
 
-#login-grid div div { 
+#login-grid div {
+  display: flex;
+  justify-content: space-between;
+}
+
+#login-grid div div {
   border-bottom: 1px solid var(--color);
-   margin: 10px 0;
-   width: 40%
+  margin: 10px 0;
+  width: 40%;
 }
 
 #login-grid ion-row ion-label {
-  margin-bottom: 5px
-}
-
-#login-grid ion-row ion-list {
-  border-radius: 5px;
-  width: 100%
+  margin-bottom: 5px;
 }
 
 #social-buttons ion-list {
@@ -59,6 +54,11 @@
   justify-content: space-between;
   width: 100%;
   background: var(--ion-color-background);
+}
+
+#login-grid ion-row ion-list {
+  border-radius: 5px;
+  width: 100%;
 }
 
 #social-buttons ion-list ion-button {

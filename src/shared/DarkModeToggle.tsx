@@ -9,24 +9,24 @@ import { useScreen } from '../hooks/useScreen';
 const DarkModeToggle: React.FC = () => {
   const { theme } = useTheme();
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    return theme === "dark"
+    return theme === 'dark';
   });
 
-  const {isMobile} = useScreen();
+  const { isMobile } = useScreen();
 
   const { t } = useTranslation();
 
   const toggleDarkMode = () => {
     document.body.classList.toggle('dark', !isDarkMode);
     setIsDarkMode(!isDarkMode);
-    setItem("theme", isDarkMode ? "light" : "dark");
+    setItem('theme', isDarkMode ? 'light' : 'dark');
   };
 
   return (
     <IonNavLink hidden={isMobile}>
-      <IonButton expand='block' onClick={toggleDarkMode} disabled={getItem("i18nextLng") === null}>
+      <IonButton expand="block" onClick={toggleDarkMode} disabled={getItem('i18nextLng') === null}>
         <IonIcon icon={isDarkMode ? sunnyOutline : moonOutline} slot="start" />
-        {t("theme.title")}
+        {t('theme.title')}
       </IonButton>
     </IonNavLink>
   );

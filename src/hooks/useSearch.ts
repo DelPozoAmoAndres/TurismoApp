@@ -1,27 +1,25 @@
 import { useState, useEffect } from 'react';
-import { Activity } from '../models/Activity';
 
+export const useSearch = (getList: (arg0: string, arg1: any) => Promise<[]>, filterScheme: any) => {
+  const [searchText, setSearchText] = useState<string>('');
+  const [filters, setFilters] = useState(filterScheme);
+  const [items, setItems] = useState([]);
 
-export const useSearch = (getList:Function,filterScheme:any) => {
-    const [searchText, setSearchText] = useState<string>('');
-    const [filters, setFilters] = useState(filterScheme);
-    const [items, setItems] = useState<any[]>([]);
-
-    useEffect(() => {
-        cargarServicios();
-    }, [searchText, filters]);
-
+  useEffect(() => {
     const cargarServicios = async () => {
-        try {
-            setItems(await getList(searchText, filters))
-        } catch (error) {
-            console.error(error);
-        }
+      try {
+        setItems(await getList(searchText, filters));
+      } catch (error) {
+        console.error(error);
+      }
     };
 
-    const handleFilter = (filters:any) => {
-        setFilters(filters);
-    };
-    
-    return {handleFilter,setSearchText,items, filters}
-}
+    cargarServicios();
+  }, [searchText, filters, getList]);
+
+  const handleFilter = (filters: any) => {
+    setFilters(filters);
+  };
+
+  return { handleFilter, setSearchText, items, filters };
+};

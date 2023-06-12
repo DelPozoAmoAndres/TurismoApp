@@ -3,14 +3,15 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import AuthProvider from './contexts/AuthContexts';
+import React from 'react';
 
 const container = document.getElementById('root');
-const root = createRoot(container!);
-root.render(
+const root = container && createRoot(container);
+root?.render(
   // <React.StrictMode>
-    <AuthProvider>
-      <App/>
-    </AuthProvider>
+  <AuthProvider>
+    <App />
+  </AuthProvider>
   // </React.StrictMode>
 );
 

@@ -1,4 +1,4 @@
-import axios, { HttpStatusCode } from 'axios';
+import axios, { AxiosError, HttpStatusCode } from 'axios';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { AuthContextType } from '../models/AuthContextType';
 import { User } from '../models/User';
@@ -8,9 +8,15 @@ import { getItem, removeItem, setItem } from '../Utils/Utils';
 export const AuthContext = createContext<AuthContextType>({
   user: null,
   token: null,
-  login: () => { },
-  logout: () => { },
-  register: () => { },
+  login: (arg0, arg1) => {
+    console.log(arg0, arg1);
+  },
+  logout: () => {
+    console.log('logout');
+  },
+  register: (arg0) => {
+    console.log(arg0);
+  },
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -20,7 +26,7 @@ interface Props {
 }
 
 const AuthProvider: React.FC<Props> = (props) => {
-  const [token, setToken] = useState<string | null>(getItem("token"));
+  const [token, setToken] = useState<string | null>(getItem('token'));
   const [user, setUser] = useState<User | null>(null);
 
   const register = async (formData: RegisterFormData) => {
@@ -29,37 +35,35 @@ const AuthProvider: React.FC<Props> = (props) => {
       throw new Error('Error de inicio de sesión. Las contraseñas no coinciden');
     }
     // Enviar la información de registro al servidor
-    return axios.post(process.env.REACT_APP_API_URL + '/register', formData)
-      .then(response => {
+    return axios
+      .post(process.env.REACT_APP_API_URL + '/register', formData)
+      .then((response) => {
         //Si se ha creado correctamente iniciar sesión automaticamente
-        if (response.status !== HttpStatusCode.Ok)
-          throw new Error(response.data.message);
-        else
-          login(formData.email, formData.password);
+        if (response.status !== HttpStatusCode.Ok) throw new Error(response.data.message);
+        else login(formData.email, formData.password);
       })
-      .catch(error => {
+      .catch((error) => {
         // Manejar errores de registro
-        error = error?.response?.data?.message || error.message
-        throw new Error(error ?? "Error desconocido en el registro")
-      })
-  }
+        error = error?.response?.data?.message || error.message;
+        throw new Error(error ?? 'Error desconocido en el registro');
+      });
+  };
 
   const login = async (email: string, password: string) => {
-    if (getItem("i18nextLng") == null) throw new Error("Debes de activar las cookies para poder iniciar sesión")
-    return axios.post(process.env.REACT_APP_API_URL + '/login', { email, password })
-      .then(response => {
+    if (getItem('i18nextLng') == null) throw new Error('Debes de activar las cookies para poder iniciar sesión');
+    return axios
+      .post(process.env.REACT_APP_API_URL + '/login', { email, password })
+      .then((response) => {
         if (response.status === HttpStatusCode.Ok) {
           setUser(response.data.user);
-          setToken(response.data.token)
+          setToken(response.data.token);
           setItem('token', response.data.token);
-        }
-        else
-          throw new Error(response.data.message)
+        } else throw new Error(response.data.message);
       })
-      .catch(error => {
+      .catch((error) => {
         // Manejar errores de inicio de sesión
-        error = error?.response?.data?.message || error.message
-        throw new Error(error ?? "Error de inicio de sesión. Por favor, comprueba tus credenciales e inténtalo de nuevo.")
+        error = error?.response?.data?.message || error.message;
+        throw new Error(error ?? 'Error de inicio de sesión. Por favor, comprueba tus credenciales e inténtalo de nuevo.');
       });
   };
 
@@ -69,28 +73,25 @@ const AuthProvider: React.FC<Props> = (props) => {
     removeItem('token');
   };
 
-
-
   useEffect(() => {
     const handleToken = () => {
-      const token = getItem("token");
+      const token = getItem('token');
       setToken(token);
       if (token) {
-        axios.get(process.env.REACT_APP_API_URL + '/user').then((response) => {
-          if (!response.data.user)
-            logout();
-          setUser(response.data.user);
-        })
-          .catch((e: any) => {
+        axios
+          .get(process.env.REACT_APP_API_URL + '/user')
+          .then((response) => {
+            if (!response.data.user) logout();
+            setUser(response.data.user);
+          })
+          .catch((e: AxiosError) => {
             if (e.response && e.response.status === HttpStatusCode.Unauthorized) {
               logout();
             }
-          })
+          });
+      } else {
+        setUser(null);
       }
-      else {
-        setUser(null)
-      }
-
     };
 
     handleToken();
@@ -101,12 +102,7 @@ const AuthProvider: React.FC<Props> = (props) => {
     };
   }, [token]);
 
-
-  return (
-    <AuthContext.Provider value={{ user, token, login, logout, register }}>
-      {props.children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ user, token, login, logout, register }}>{props.children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;

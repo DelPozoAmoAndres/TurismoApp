@@ -1,15 +1,15 @@
 #activity-image-card {
-    max-width: 600px;
-    min-width: 350;
-    max-height: 450px;
+  max-width: 600px;
+  min-width: 350;
+  max-height: 450px;
 }
 
-@media only screen and (max-width: 1052px) {
-    #activity-image-card {
-        margin: auto;
-    }
+@media only screen and (width <= 1052px) {
+  #activity-image-card {
+    margin: auto;
+  }
 }
 
 .swiper-pagination {
-    color: white;
+  color: white;
 }

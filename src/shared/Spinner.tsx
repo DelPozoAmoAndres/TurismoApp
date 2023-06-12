@@ -1,6 +1,6 @@
 import React from 'react';
 import { IonSpinner } from '@ionic/react';
-import "./Spinner.css"
+import './Spinner.css';
 
 interface SpinnerProps {
   message?: string;

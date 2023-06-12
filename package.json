@@ -56,7 +56,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!(@ionic/react|@ionic/react-router|@ionic/core|@stencil/core|ionicons)/)'",
     "eject": "react-scripts eject",
-    "android": "npx cap sync && npx ionic build && npx cap run android --external --no-build --no-sync"
+    "android": "npx cap sync && npx ionic build && npx cap run android --external --no-build --no-sync",
+    "lint:css": "stylelint \"src/**/*.css\"",
+    "lint:eslint": "eslint src/** --fix",
+    "format:prettier": "prettier --write \"src/**/*.{ts,tsx,json,css}\"",
+    "lint": "npm run lint:css && npm run lint:eslint && npm run format:prettier"
   },
   "eslintConfig": {
     "extends": [
@@ -75,6 +79,15 @@
   "description": "An Ionic project",
   "devDependencies": {
     "@capacitor/cli": "5.0.3",
-    "react": "^18.2.0"
+    "@typescript-eslint/eslint-plugin": "^5.59.9",
+    "@typescript-eslint/parser": "^5.59.9",
+    "eslint": "^8.42.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^2.8.8",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "stylelint": "^15.7.0",
+    "stylelint-config-standard": "^33.0.0"
   }
 }
