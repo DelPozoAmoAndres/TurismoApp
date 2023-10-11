@@ -1,13 +1,13 @@
 import { useState, FormEvent } from 'react';
 import { RegisterFormData } from '../models/User';
 import { useAuth } from '../contexts/AuthContexts';
-import { filterPropertiesNotNull } from '../Utils/Utils';
+import { filterPropertiesNotNull } from '../utils/utils';
 import { AxiosError } from 'axios';
 
 export const useRegister = () => {
   const [formData, setFormData] = useState<RegisterFormData>({
     name: '',
-    telephone: null,
+    telephone: '',
     email: '',
     birthday: null,
     country: null,

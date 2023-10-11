@@ -1,24 +1,21 @@
-import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Redirect, Route, useHistory } from 'react-router-dom';
 /* Ionic Components */
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Capacitor } from '@capacitor/core';
+import { App, URLOpenListenerEvent } from '@capacitor/app';
 /* Pages */
-import HomePage from './components/Home/HomePage';
-import NotFound from './pages/NotFoundPage';
-import Register from './components/Auth/Register';
-import AdminDashboard from './pages/Admin/AdminDashboard';
-import { ReservationStatusPage } from './components/Reservation/ReservationStatusPage';
-import ReservationDetailsPage from './components/ReservationDetails/ReservationDetailsPage';
-import SearchActivityPage from './components/ActivitySearh/ActivitySearchPage';
-import ReservationListPage from './components/ReservationList/ReservationListPage';
-import ProfilePage from './pages/ProfilePage';
-import ReservationPage from './components/Reservation/ReservationPage';
-import { AppPage } from './pages/AppPage';
-import UserList from './pages/Admin/Users/UserList';
-import UserProfile from './pages/Admin/Users/UserDetails';
-import ActivityDetailsPage from './components/ActivityDetails/ActivityDetailsPage';
+import HomePage from '@home/HomePage';
+import NotFound from '@pages/NotFoundPage';
+import AdminDashboard from '@components/Admin/AdminDashboard';
+import ReservationDetailsPage from '@reservation-details/ReservationDetailsPage';
+import SearchActivityPage from '@search-activity/ActivitySearchPage';
+import ReservationListPage from '@reservation-list/ReservationListPage';
+import ProfilePage from '@personal-area/Profile/ProfilePage';
+import ReservationPage from '@create-reservation/ReservationPage';
+import { AppPage } from '@pages/AppPage';
+import ActivityDetailsPage from '@activity-details/ActivityDetailsPage';
 /* Styles */
 import '@ionic/react/css/core.css';
 import '@ionic/react/css/normalize.css';
@@ -30,19 +27,22 @@ import '@ionic/react/css/text-alignment.css';
 import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
-import './theme/variables.css';
+import '@theme/variables.css';
 /* Utility */
 import axios from 'axios';
-import { getItem } from './Utils/Utils';
+import { getItem } from '@utils/utils';
 /* i18n */
 import { I18nextProvider } from 'react-i18next';
-import i18n from './components/i18n/i18n';
+import i18n from '@components/i18n/i18n';
 /* Components */
-import AdminRoute from './shared/AdminRoute';
-import TabBar from './components/Menu/TabBar';
-import PrivateRoute from './shared/PrivateRoute';
+import AdminRoute from '@shared/AdminRoute';
+import TabBar from '@menu/TabBar/TabBar';
+import PrivateRoute from '@shared/PrivateRoute';
 /* Hooks */
-import { useTheme } from './hooks/useTheme';
+import { useTheme } from '@hooks/useTheme';
+import UserSearchPage from '@search-user/UserSearchpage';
+import UserDetailsPage from '@components/Admin/Users/UserDetailsPage';
+import EventsPage from '@components/Events/EventsPage';
 
 setupIonicReact();
 
@@ -57,32 +57,48 @@ axios.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-const App: React.FC = () => {
+const AppIndex: React.FC = () => {
   useTheme();
+  const history =useHistory();
+
+  useEffect(() => {
+    App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
+      // Example url: https://example.app/tabs/tab2
+      // slug = /tabs/tab2
+      const slug = event.url.split('.app').pop();
+      if (slug) {
+        history.push(slug);
+      }
+    });
+  }, [history]);
+
   return (
     <I18nextProvider i18n={i18n}>
       <IonApp>
         <IonReactRouter>
           <AppPage>
             <IonRouterOutlet>
+            <Route path={"/*"} component={NotFound} />
               <Route exact path="/">
                 {Capacitor.isNativePlatform() ? <Redirect to="/movil" /> : <Redirect to="/home" />}
               </Route>
               <Route path="/movil" render={() => <TabBar />} />
-              <Route exact path="/registro" component={Register} />
               <Route exact path="/home" component={HomePage} />
               <Route exact path="/buscar" component={SearchActivityPage} />
               <Route exact path="/activity/:id" component={ActivityDetailsPage} />
               <PrivateRoute path="/activity/:id/reservar/" component={ReservationPage} alternativePath="/" />
               <PrivateRoute exact path="/perfil" component={ProfilePage} alternativePath="/" />
               <PrivateRoute exact path="/reservas" component={ReservationListPage} alternativePath="/" />
-              <Route path="/payment/status" component={ReservationStatusPage} />
+              {/* <Route path="/payment/status" component={ReservationStatusPage} /> */}
               {/* <PrivateRoute exact path="/saved" component={SavedPage} alternativePath='/' /> */}
               <PrivateRoute exact path="/reservation/:id" component={ReservationDetailsPage} alternativePath="/" />
               <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
-              <AdminRoute exact path="/admin/users" component={UserList} />
-              <AdminRoute exact path="/admin/user/:id" component={UserProfile} />
-              <Route component={NotFound} />
+              <AdminRoute exact path="/admin/users" component={UserSearchPage} />
+              <AdminRoute exact path="/admin/user/:id" component={UserDetailsPage} />
+              <AdminRoute exact path="/admin/user/:id" component={UserDetailsPage} />
+              <AdminRoute exact path="/admin/activity/:id/events/" component={EventsPage}/>
+              {/*<PrivateRoute exact path="/nextEvents/" component={NextEventsPage} alternativePath="/" />*/}
+              
             </IonRouterOutlet>
           </AppPage>
         </IonReactRouter>
@@ -91,4 +107,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default AppIndex;

@@ -1,4 +1,4 @@
-import { getItem } from '../Utils/Utils';
+import { getItem } from '../utils/utils';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { Capacitor } from '@capacitor/core';
 

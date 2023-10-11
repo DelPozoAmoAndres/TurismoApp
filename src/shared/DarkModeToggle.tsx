@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { IonIcon, IonButton, IonNavLink } from '@ionic/react';
 import { moonOutline, sunnyOutline } from 'ionicons/icons';
-import { getItem, setItem } from '../Utils/Utils';
+import { getItem, setItem } from '../utils/utils';
 import { useTheme } from '../hooks/useTheme';
 import { useTranslation } from 'react-i18next';
-import { useScreen } from '../hooks/useScreen';
 
-const DarkModeToggle: React.FC = () => {
+type DarkModeToggleProps = {
+  hidden: boolean,
+};
+
+const DarkModeToggle: React.FC<DarkModeToggleProps> = ({hidden}) => {
   const { theme } = useTheme();
   const [isDarkMode, setIsDarkMode] = useState(() => {
     return theme === 'dark';
   });
-
-  const { isMobile } = useScreen();
 
   const { t } = useTranslation();
 
@@ -23,10 +24,10 @@ const DarkModeToggle: React.FC = () => {
   };
 
   return (
-    <IonNavLink hidden={isMobile}>
+    <IonNavLink hidden={hidden}>
       <IonButton expand="block" onClick={toggleDarkMode} disabled={getItem('i18nextLng') === null}>
         <IonIcon icon={isDarkMode ? sunnyOutline : moonOutline} slot="start" />
-        {t('theme.title')}
+        {t('theme.change')}
       </IonButton>
     </IonNavLink>
   );

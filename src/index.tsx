@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import App from './App';
+import AppIndex from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import AuthProvider from './contexts/AuthContexts';
@@ -10,7 +10,7 @@ const root = container && createRoot(container);
 root?.render(
   // <React.StrictMode>
   <AuthProvider>
-    <App />
+    <AppIndex />
   </AuthProvider>
   // </React.StrictMode>
 );

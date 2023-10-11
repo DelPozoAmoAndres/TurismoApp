@@ -34,3 +34,7 @@ yarn-error.log*
 .env
 
 android/app/astour-release-key.keystore
+
+.vercel
+
+*.env

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Event } from '../models/Activity';
 
-export const useSoldOut = (events: Event[] | null) => {
+export const useSoldOut = (events: Event[]| undefined) => {
   /* Internal states */
   const [soldOutProps, setSoldOut] = useState({}); //Variable to change the state of the availability button
 

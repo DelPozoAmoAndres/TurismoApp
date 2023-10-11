@@ -1,0 +1,40 @@
+#activity-info {
+  max-width: 600px;
+  width: 100%;
+}
+
+#activity-info ion-row {
+  display: flex;
+  flex-direction: column;
+}
+
+#activity-info div {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 20px;
+}
+
+#activity-info div ion-button {
+  width: 20%;
+  min-width: 150px;
+}
+
+#activity-info ion-row ion-text {
+  width: 100%;
+}
+
+@media only screen and (width <= 440px) {
+  #activity-info  ion-col  ion-col section  {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2.5%;
+    /* background-color: var(--background); */
+    z-index: 2;
+  }
+  #activity-info {
+    min-width: auto;
+    margin-bottom: 70px;
+  }
+}

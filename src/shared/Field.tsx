@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { IonInput } from '@ionic/react';
-import { useLanguage } from '../hooks/useLanguage';
 
 interface FieldProps {
   value: string;

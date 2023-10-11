@@ -3,21 +3,24 @@ import { IonButton, IonIcon, IonNavLink, IonSelect, IonSelectOption } from '@ion
 import { globeOutline } from 'ionicons/icons';
 import { Language } from '../models/Language';
 import i18n from '../components/i18n/i18n';
-import { getItem } from '../Utils/Utils';
+import { getItem } from '../utils/utils';
 import { useLanguage } from '../hooks/useLanguage';
-import { useScreen } from '../hooks/useScreen';
 
-const LanguageSelector: React.FC = () => {
+type LanguageSelectorProps = {
+  hidden: boolean,
+};
+
+const LanguageSelector: React.FC<LanguageSelectorProps> = ({hidden}) => {
   const { languages, defaultLanguage } = useLanguage();
   const [selectedLanguage, setSelectedLanguage] = useState(defaultLanguage);
-  const { isMobile } = useScreen();
   const handleLanguageChange = async (lang: Language) => {
-    await i18n.changeLanguage(lang.code);
     setSelectedLanguage(lang);
+    await i18n.changeLanguage(lang.code);
+    
   };
 
   return (
-    <IonNavLink hidden={isMobile}>
+    <IonNavLink hidden={hidden} >
       <IonButton expand="block" disabled={getItem('i18nextLng') === null}>
         <IonIcon slot="start" icon={globeOutline} />
         <IonSelect
@@ -25,9 +28,9 @@ const LanguageSelector: React.FC = () => {
           interface="popover"
           selectedText={selectedLanguage.name}
           onIonChange={async (e) => {
-            console.log(e.detail);
             await handleLanguageChange(e.detail.value);
           }}
+          value={selectedLanguage}
         >
           {languages.map((lang) => (
             <IonSelectOption key={lang.code} value={lang}>

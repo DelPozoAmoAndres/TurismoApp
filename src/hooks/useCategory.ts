@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getActivityList } from '../apis/activityApi';
-import { Activity, ActivityState } from '../models/Activity';
+import { Activity } from '../models/Activity';
 
 export const useCategory = () => {
   const [actividades, setActividades] = useState<{
@@ -14,12 +14,12 @@ export const useCategory = () => {
     playa: actividades.beach,
   };
   useEffect(() => {
-    getActivityList("",{state:ActivityState.available})
+    getActivityList("",{})
       .then((list) =>
         setActividades({
-          populars: [...list, ...list],
-          mountain: [],
-          beach: [],
+          populars: [...list,],
+          mountain: [...list],
+          beach: [...list],
         })
       )
       .catch((error) => console.error(error));

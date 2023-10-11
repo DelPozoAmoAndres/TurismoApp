@@ -15,7 +15,7 @@
     }
   },
   "rules": {
-    // Aquí puedes configurar tus reglas personalizadas o desactivar las reglas que no deseas
+    "@typescript-eslint/no-explicit-any": "off"
   },
   "settings": {
     "react": {

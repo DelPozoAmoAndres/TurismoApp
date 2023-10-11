@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getEvents } from '../apis/activityApi';
-import { formatDate } from '../Utils/Utils';
+import { formatDate } from '../utils/utils';
 import { Event } from '../models/Activity';
 
 export const useActivityAvailability = (activityId: string) => {
@@ -22,6 +22,7 @@ export const useActivityAvailability = (activityId: string) => {
 
   useEffect(() => {
     getEvents(activityId).then((events: Event[]) => {
+      if(!events) return;
       setEvents(events);
       const days: {
         date: string;

@@ -1,4 +1,4 @@
-import { getItem } from '../Utils/Utils';
+import { getItem } from '../utils/utils';
 import { Language } from '../models/Language';
 
 export const useLanguage = () => {

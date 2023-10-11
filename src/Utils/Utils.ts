@@ -1,12 +1,15 @@
+const MAX_FILE_SIZE_KB = 100;
+const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_KB * 1024; 
+
 // Filtrar las propiedades que no sean null
-export const filterPropertiesNotNull =(data: any)=> {
+export const filterPropertiesNotNull = (data: any) => {
   const filteredData: any = {};
   Object.entries(data).forEach(([key, value]) => {
     if (value !== null) {
       filteredData[key] = value;
     }
   });
-  return filteredData ;
+  return filteredData;
 };
 
 //Formatear fechas para inputs
@@ -53,4 +56,60 @@ export function removeItem(key: string) {
   } catch (error: unknown) {
     return null;
   }
+}
+
+export async function uploadImage(fr: FileReader, event: React.ChangeEvent<HTMLInputElement>, getImage: () => void) {
+  const files = event.target.files;
+  if (files && files?.length > 0) {
+    const process = async () => {
+      fr.removeEventListener("load", process);
+      const file = files[0]
+      console.log(file.size)
+      if (file && file.size > MAX_FILE_SIZE_BYTES) {
+        //FIXME: Mostrar mensaje de error
+        alert(`El archivo es demasiado grande. El tamaño máximo permitido es de ${MAX_FILE_SIZE_KB}MB.`);
+        return;
+      }
+      await optimizeImage(fr, file)
+      getImage()
+    }
+    fr.addEventListener('load', process);
+    fr.readAsDataURL(files[0])
+  }
+}
+
+export async function optimizeImage(fr: FileReader, file: File) {
+  return new Promise<string>((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width; // Ancho deseado
+      canvas.height = img.height; // Ancho deseado
+
+      const ctx = canvas.getContext('2d');
+      ctx?.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      canvas.toBlob((blob) => {
+        if (blob) {
+          fr.onload = () => {
+            resolve(fr.result as string);
+          };
+
+          fr.onerror = (error) => {
+            reject(error);
+          };
+
+          fr.readAsDataURL(blob);
+        } else {
+          reject(new Error('Error al crear el Blob'));
+        }
+      }, 'image/webp', 0.5);
+    };
+
+    img.onerror = (error) => {
+      reject(error);
+    };
+
+    img.src = URL.createObjectURL(file);
+  });
 }

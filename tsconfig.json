@@ -18,9 +18,32 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "./src/",
+    "paths": {
+      "@apis/*": ["apis/*"],
+      "@components/*": ["components/*"],
+      "@pages/*": ["pages/*"],
+      "@contexts/*": ["contexts/*"],
+      "@hooks/*": ["hooks/*"],
+      "@models/*": ["models/*"],
+      "@shared/*": ["shared/*"],
+      "@theme/*": ["theme/*"],
+      "@utils/*": ["utils/*"],
+
+      // Components
+      "@menu/*": ["components/0 - Menu/*"],
+      "@home/*": ["components/1 - Home/*"],
+      "@search-activity/*": ["components/2 - Search Activity/*"],
+      "@activity-details/*": ["components/3 - Activity Details/*"],
+      "@personal-area/*": ["components/4 - Personal Area/*"],
+      "@create-reservation/*": ["components/5 - Create Reservation/*"],
+      "@reservation-list/*": ["components/6 - Reservation List/*"],
+      "@reservation-details/*": ["components/7 - Reservation Details/*"],
+      "@search-user/*": ["components/8 - Search User/*"],
+    }
   },
   "include": [
-    "src"
+    "src", 
   ]
 }

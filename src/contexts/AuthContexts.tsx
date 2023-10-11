@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { AuthContextType } from '../models/AuthContextType';
 import { User } from '../models/User';
 import { RegisterFormData } from '../models/User';
-import { getItem, removeItem, setItem } from '../Utils/Utils';
+import { getItem, removeItem, setItem } from '../utils/utils';
 
 export const AuthContext = createContext<AuthContextType>({
   user: null,
@@ -81,11 +81,13 @@ const AuthProvider: React.FC<Props> = (props) => {
         axios
           .get(process.env.REACT_APP_API_URL + '/user')
           .then((response) => {
-            if (!response.data.user) logout();
-            setUser(response.data.user);
+            console.log(response);
+            if (!response.data) logout();
+            setUser(response.data);
           })
           .catch((e: AxiosError) => {
             if (e.response && e.response.status === HttpStatusCode.Unauthorized) {
+              
               logout();
             }
           });

@@ -6,12 +6,10 @@ export const useExitAlert = () => {
   const [showAlert, setShowAlert] = useState(false);
   const location = useLocation();
   useEffect(() => {
-    const backPressHandler = App.addListener('backButton', () => {
-      if (location.pathname.includes('home')) setShowAlert(true);
+    App.addListener('backButton', (e:any) => {
+      e.preventDefault();
+      if (location.pathname.includes('home')) setShowAlert(true)
     });
-    return () => {
-      backPressHandler.remove();
-    };
   }, [location]);
 
   const handleAlertConfirm = () => {

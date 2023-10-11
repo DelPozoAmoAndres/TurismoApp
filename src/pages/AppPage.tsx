@@ -1,10 +1,10 @@
 import { IonContent, IonPage } from '@ionic/react';
 import React, { ReactNode } from 'react';
-import { Header } from '../components/Menu/Header';
-import AppMenu from '../components/Menu/AppMenu';
-import Login from '../components/Auth/Login';
-import { useAuth } from '../contexts/AuthContexts';
-import { useScreen } from '../hooks/useScreen';
+import { Header } from '@menu/NavBar/Header';
+import AppMenu from '@menu/Desplegable/AppMenu';
+import Login from '@personal-area/Login/Login';
+import { useAuth } from '@contexts/AuthContexts';
+import { useScreen } from '@hooks/useScreen';
 import PropTypes from 'prop-types';
 type Props = {
   children: ReactNode;
@@ -16,11 +16,11 @@ export const AppPage: React.FC<Props> = React.memo(({ children }) => {
   return (
     <>
       <IonPage>
-        {!auth.user && <Login />}
+        {browsingWeb && isMobile && <><AppMenu /> </>}
         {browsingWeb && <Header />}
+        {!auth.user && <Login /> }
         <IonContent id="main-content">{children}</IonContent>
       </IonPage>
-      {browsingWeb && isMobile && <AppMenu />}
     </>
   );
 });

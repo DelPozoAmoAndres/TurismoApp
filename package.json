@@ -6,6 +6,7 @@
     "@capacitor-community/stripe": "^5.0.1",
     "@capacitor/android": "5.0.3",
     "@capacitor/app": "^5.0.2",
+    "@capacitor/clipboard": "^5.0.4",
     "@capacitor/core": "5.0.3",
     "@capacitor/ios": "5.0.3",
     "@capacitor/share": "^5.0.2",
@@ -52,9 +53,10 @@
     "workbox-streams": "^5.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!(@ionic/react|@ionic/react-router|@ionic/core|@stencil/core|ionicons)/)'",
+    "dev": "set PORT=8081 && npm run start",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test --transformIgnorePatterns 'node_modules/(?!(@ionic/react|@ionic/react-router|@ionic/core|@stencil/core|ionicons)/)'",
     "eject": "react-scripts eject",
     "android": "npx cap sync && npx ionic build && npx cap run android --external --no-build --no-sync",
     "lint:css": "stylelint \"src/**/*.css\"",
@@ -79,14 +81,18 @@
   "description": "An Ionic project",
   "devDependencies": {
     "@capacitor/cli": "5.0.3",
+    "@craco/craco": "^7.1.0",
+    "@types/customize-cra": "^1.0.5",
     "@typescript-eslint/eslint-plugin": "^5.59.9",
     "@typescript-eslint/parser": "^5.59.9",
+    "customize-cra": "^1.0.0",
     "eslint": "^8.42.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.8.8",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
+    "react-app-rewired": "^2.2.1",
     "stylelint": "^15.7.0",
     "stylelint-config-standard": "^33.0.0"
   }

@@ -79,6 +79,8 @@
   "total.price": "Total price",
   "inicio-de-sesion": "Login",
   "ver-perfil": "Personal area",
+  "home.title": "Home",
+  "theme.change": "Change theme",
   "adminLogin.title": "Administrator login",
   "adminLogin.backButton": "go home",
   "adminLogin.emailLabel": "Email",

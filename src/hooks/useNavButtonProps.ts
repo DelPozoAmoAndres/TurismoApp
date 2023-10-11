@@ -8,6 +8,7 @@ export const useNavButtonProps = (routeLink: string) => {
   useEffect(() => {
     const style = { borderBottom: ' 1px solid var(--ion-color-primary)' };
     const handlePopState = () => {
+      if (routeLink==="") return {}
       return history.location.pathname.includes(routeLink) ? { style } : {};
     };
     history.listen(() => setProps(handlePopState));

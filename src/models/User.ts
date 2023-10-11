@@ -1,17 +1,23 @@
 import { Activity } from './Activity';
 
-export interface User {
-  name: string;
-  email: string;
+export class User {
+  name: string ;
+  email: string ;
   birthday?: Date | null;
-  telephone?: number | null;
+  telephone?: string;
   country?: string | null;
-  password: string;
+  password: string ;
   role?: Role;
   createdAt?: Date;
   updatedAt?: Date;
   schedules?: Schedule[];
   _id?: string;
+
+  constructor() {
+    this.name="",
+    this.email="",
+    this.password=""
+  }
 }
 
 export interface Schedule {
@@ -49,7 +55,7 @@ export enum Role {
   'guía' = 'worker',
 }
 
-export interface UserFilter {
+export interface UserFilter extends Record<string, unknown> {
   country: string | null;
   role: Role | null;
 }

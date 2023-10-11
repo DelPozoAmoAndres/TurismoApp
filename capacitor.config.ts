@@ -13,8 +13,7 @@ const config: CapacitorConfig = {
 
   },
   ios: {
-
-  }
+  },
   
 };
 
