@@ -5,6 +5,7 @@ import { User } from '@models/User';
 import { RegisterFormData } from '@models/User';
 import { getItem, removeItem, setItem } from '@utils/utils';
 import { useIonRouter } from '@ionic/react';
+import Login from '@components/4 - Personal Area/Login/Login';
 
 export const AuthContext = createContext<AuthContextType>({
   user: null,
@@ -18,6 +19,10 @@ export const AuthContext = createContext<AuthContextType>({
   register: (arg0) => {
     console.log(arg0);
   },
+  setShowLoginModal: (arg0) => {
+    console.log(arg0);
+  },
+  showLoginModal: false,
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -29,7 +34,7 @@ interface Props {
 const AuthProvider: React.FC<Props> = (props) => {
   const [token, setToken] = useState<string | null>(getItem('token'));
   const [user, setUser] = useState<User | null>(null);
-  const router = useIonRouter();
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const register = async (formData: RegisterFormData) => {
     // Validar que las contraseñas coincidan
@@ -89,7 +94,7 @@ const AuthProvider: React.FC<Props> = (props) => {
           })
           .catch((e: AxiosError) => {
             if (e.response && e.response.status === HttpStatusCode.Unauthorized) {
-              
+
               logout();
             }
           });
@@ -106,7 +111,12 @@ const AuthProvider: React.FC<Props> = (props) => {
     };
   }, [token]);
 
-  return <AuthContext.Provider value={{ user, token, login, logout, register }}>{props.children}</AuthContext.Provider>;
+  return ( 
+    <AuthContext.Provider value={{ user, token, login, logout, register, setShowLoginModal, showLoginModal }}>
+      <Login />
+      {props.children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

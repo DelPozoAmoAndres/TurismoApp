@@ -31,11 +31,11 @@ export const Modal: React.FC<{
 
   function dismiss() {
     modal.current?.dismiss();
-    if (setOpen) setOpen(false);
   }
+
   const { t } = useTranslation();
   return (
-    <IonModal ref={modal} id={id} trigger={trigger} {...props} isOpen={isOpen} backdropDismiss={false}>
+    <IonModal ref={modal} id={id} trigger={trigger} {...props} isOpen={isOpen}  onDidDismiss={()=> setOpen && setOpen(!isOpen)}>
       <IonHeader mode="ios" collapse="fade" class="ion-margin-top">
         <IonToolbar>
           <IonButtons slot="end">

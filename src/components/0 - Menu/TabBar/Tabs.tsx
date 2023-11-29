@@ -2,9 +2,11 @@ import React from 'react';
 import { IonIcon, IonLabel, IonTabButton } from '@ionic/react';
 import { briefcaseOutline, homeOutline, personOutline } from 'ionicons/icons';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '@contexts/AuthContexts';
 
 export const Tabs = () => {
   const { t } = useTranslation();
+  const {setShowLoginModal} = useAuth();
   const HomeTab = (
     <IonTabButton tab="tab1" href="/movil/home">
       <IonIcon icon={homeOutline} />
@@ -12,7 +14,7 @@ export const Tabs = () => {
     </IonTabButton>
   );
   const PersonalAreaTab = (
-    <IonTabButton tab="tab2" onClick={() => document.getElementById('login-modal')?.click()}>
+    <IonTabButton tab="tab2" onClick={() => setShowLoginModal(true)}>
       <IonIcon icon={personOutline} />
       <IonLabel>{t('account.title')}</IonLabel>
     </IonTabButton>

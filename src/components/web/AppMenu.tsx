@@ -31,12 +31,13 @@ const AppMenu: React.FC = () => {
   const menuController = useRef<HTMLIonMenuElement>(null);
 
   const handleLoginClick = () => {
+    auth.setShowLoginModal(true);
     if (menuController.current?.isOpen())
       menuController.current?.close();
   };
 
   return (
-    <IonMenu contentId="main-content" ref={menuController}>
+    <IonMenu contentId="pageWeb" ref={menuController}>
       <IonHeader>
         <IonToolbar style={{ '--background': 'var(--ion-color-primary)' }}>
           <IonRow className="ion-margin ion-align-items-center">
@@ -58,7 +59,7 @@ const AppMenu: React.FC = () => {
               <IonLabel>{t('home.title')}</IonLabel>
             </IonItem>
           </IonMenuToggle>
-          <IonItem hidden={auth.user !== null} id="login-modal" button onClick={handleLoginClick}>
+          <IonItem hidden={auth.user !== null} button onClick={handleLoginClick}>
             <IonIcon slot="start" icon={personOutline} />
             <IonLabel>{t('account.title')}</IonLabel>
           </IonItem>
