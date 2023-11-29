@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { ReservationContextType } from '../models/ReservationContextType';
-import { Activity, Event } from '../models/Activity';
-import { Reservation } from '../models/Reservation';
-import { getActivity } from '../apis/activityApi';
+import { ReservationContextType } from '@models/ReservationContextType';
+import { Activity, Event } from '@models/Activity';
+import { Reservation } from '@models/Reservation';
+import { getActivity } from '@apis/activityApi';
 import { useLocation } from 'react-router';
-import { createReservation } from '../apis/reservationApi';
+import { createReservation } from '@apis/reservationApi';
 import { PaymentIntent } from '@stripe/stripe-js';
 
 export const ReservationContext = createContext<ReservationContextType>({

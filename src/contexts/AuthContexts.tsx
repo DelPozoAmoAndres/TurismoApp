@@ -1,9 +1,9 @@
 import axios, { AxiosError, HttpStatusCode } from 'axios';
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { AuthContextType } from '../models/AuthContextType';
-import { User } from '../models/User';
-import { RegisterFormData } from '../models/User';
-import { getItem, removeItem, setItem } from '../utils/utils';
+import { AuthContextType } from '@models/AuthContextType';
+import { User } from '@models/User';
+import { RegisterFormData } from '@models/User';
+import { getItem, removeItem, setItem } from '@utils/utils';
 import { useIonRouter } from '@ionic/react';
 
 export const AuthContext = createContext<AuthContextType>({
