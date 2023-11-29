@@ -15,8 +15,13 @@ import './Header.css';
 /* i18n */
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
+import AppMenu from '@components/0 - Menu/Desplegable/AppMenu';
 
-export const Header = () => {
+interface HeaderProps {
+  openLogin: (arg0: boolean) => void;
+}
+
+export const Header : React.FC<HeaderProps> = ({openLogin}) => {
   const { isMobile, browsingWeb } = useScreen();
   const { t } = useTranslation();
   return (
@@ -36,7 +41,7 @@ export const Header = () => {
           </IonButtons>
           <IonButtons slot="end" >
             <Button routeLink="/home" icon={homeOutline} text={t('home.title')} />
-            <Button id="login-modal" icon={personOutline} text={t('account.title')} />
+            <Button onClick={()=>openLogin(true)} icon={personOutline} text={t('account.title')} />
             {/* <Button id="register-modal" icon={personOutline} text={t('sign.up')} /> */}
             <Button role={null} routeLink="/home" icon={homeOutline} text={t('home.title')} />
             <Button role={null} routeLink="/perfil" icon={personOutline} text={t('profile.title')} />

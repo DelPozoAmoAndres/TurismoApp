@@ -35,7 +35,7 @@ export const ActivitySortSelect: React.FC = () => {
           {t('activity.add')}
         </IonButton>
       )}
-      <ActivityModal activity={new Activity()} action="add" />
+      { auth.user?.role==Role.administrador && <ActivityModal activity={new Activity()} action="add" />}
     </IonRow>
   );
 };

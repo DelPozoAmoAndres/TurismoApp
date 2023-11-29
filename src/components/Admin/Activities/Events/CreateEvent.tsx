@@ -58,7 +58,6 @@ const CreateEvent: React.FC<CreateEventProps> = ({ activityId }) => {
     setRepeatDays(days);
   };
 
-  console.log(formData);
   const { defaultLanguage } = useLanguage();
 
   return (

@@ -85,7 +85,6 @@ export const ActivityInfo: React.FC<{
           {activityData?.events && activityData.events.length > 0 ? t('show.availability') : t('sold.out')}
         </IonButton>
       </section>
-      <Login />
     </div>
   );
 };

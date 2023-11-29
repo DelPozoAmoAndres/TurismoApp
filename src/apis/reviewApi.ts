@@ -7,7 +7,7 @@ export const createReview = async (review: Review) => {
 };
 
 export const getReviews = async (activityId: string): Promise<Review[]> => {
-  return axios.get(`${process.env.REACT_APP_API_URL}/activity/${activityId}/reviews`).then((res) => res.data).catch((err)=>{console.log(err)});
+  return axios.get(`${process.env.REACT_APP_API_URL}/activity/${activityId}/reviews`).then((res) => res.data);
 };
 
 export const deleteReview = async (reviewId: string) => {

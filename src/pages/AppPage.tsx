@@ -10,7 +10,6 @@ export const AppPage: React.FC<Props> = ({ children }) => {
   return (
     <>
       <IonPage>
-        <Login />
         <IonContent id="main-content">{children}</IonContent>
       </IonPage>
     </>

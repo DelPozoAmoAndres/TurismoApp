@@ -23,7 +23,6 @@ export const useEdit = <T>(item: T, editFunc: (arg0: T) => void) => {
         setEdited(true);
       else
         setEdited(false);
-        console.log(formData)
     }, [formData,originalData]);
   
     return { formData, setFormData, showAlert, setShowAlert, guardarCambios, edited };

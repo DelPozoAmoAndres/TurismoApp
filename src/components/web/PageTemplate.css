@@ -27,17 +27,10 @@ h2{
   
 }
 
-ion-footer {
-  position: relative;
-  bottom: 0;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
-
-.pageWeb ion-content > div{
+#pageWeb ion-content > div{
   display: grid;
   grid-template-rows: auto 1fr auto; 
   min-height: 100vh;
   grid-template-columns: 1fr;
 }
+

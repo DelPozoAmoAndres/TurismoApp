@@ -60,7 +60,7 @@ export const ActivityItem: React.FC<{ activity: Activity, style?:IonicReactProps
           <IonButton routerLink={`/activity/${activity._id}`}>{t('show.info')}</IonButton>
         </IonCardContent>
       </IonCard>
-      <ActivityModal activity={activity} action="edit" />
+       { auth.user?.role==Role.administrador && <ActivityModal activity={activity} action="edit" />}
       <IonAlert
           isOpen={showDeleteAlert}
           onDidDismiss={()=>setShowDeleteAlert(false)}
