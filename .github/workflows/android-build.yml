@@ -23,15 +23,12 @@ jobs:
 
     - name: Go android folder
       run: cd android
-
-    - name: Decode Keystore File
-      run: echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > my-release-key.keystore
         
     - name: Grant execute permission for gradlew
-      run: chmod +x ./gradlew
+      run: chmod +x gradlew
 
     - name: Build Release APK
-      run: ./gradlew assembleRelease
+      run: gradlew assembleRelease
       env:
         KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
 
