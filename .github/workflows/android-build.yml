@@ -20,23 +20,17 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-
-    - name: Go android folder
-      run: cd android
-
-    - name: Decode Keystore File
-      run: echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > my-release-key.keystore
         
     - name: Grant execute permission for gradlew
-      run: chmod +x ./gradlew
+      run: cd android && chmod +x gradlew
 
     - name: Build Release APK
-      run: ./gradlew assembleRelease
+      run: cd android && gradlew assembleRelease
       env:
         KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
 
     - name: Rename APK
-      run: mv ./app/build/outputs/apk/release/app-release.apk ./app/build/outputs/apk/release/${GITHUB_REF#refs/tags/}-release.apk
+      run: mv ./android/app/build/outputs/apk/release/app-release.apk ./android/app/build/outputs/apk/release/${GITHUB_REF#refs/tags/}-release.apk
 
     - name: Get the version
       id: get_version
@@ -59,6 +53,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./app/build/outputs/apk/release/${{ steps.get_version.outputs.VERSION }}-release.apk
+        asset_path: ./android/app/build/outputs/apk/release/${{ steps.get_version.outputs.VERSION }}-release.apk
         asset_name: ${{ steps.get_version.outputs.VERSION }}-release.apk
         asset_content_type: application/vnd.android.package-archive
