@@ -21,6 +21,14 @@ jobs:
         java-version: '17'
         distribution: 'adopt'
 
+    - name: Set up Capacitor Cordova
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    
+    - name: Install dependencies
+      run: npm install &&  cordova platform add android
+
     - name: Build Release APK
       run: cd android && chmod +x ./gradlew && ./gradlew assembleRelease
       env:
