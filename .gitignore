@@ -24,16 +24,14 @@
 !/.vscode/extensions.json
 .idea
 
+/**/build
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
 # Optional eslint cache
 .eslintcache
-
-.env
-
-android/app/astour-release-key.keystore
 
 .vercel
 
