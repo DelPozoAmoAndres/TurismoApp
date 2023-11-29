@@ -43,7 +43,6 @@
       "@search-user/*": ["components/8 - Search User/*"],
     }
   },
-  "include": [
-    "src", 
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
