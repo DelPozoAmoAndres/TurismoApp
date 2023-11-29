@@ -11,41 +11,46 @@ import { ActivityCardList } from './ActivityCardList';
 import { useTranslation } from 'react-i18next';
 import { useScreen } from '@hooks/useScreen';
 import { AppPage } from '@pages/AppPage';
+import Logo from '@components/web/Logo';
+import PageTemplate from '@components/web/PageTemplate';
+import DownloadApp from './DownloadApp';
 
 const HomePage: React.FC<RouteComponentProps> = () => {
   const { showAlert, handleAlertCancel, handleAlertConfirm } = useExitAlert(); // Hook to handle the alert of exit when its pressed back button on native apps
   const { t } = useTranslation(); //Hook to change the translation without refreshing the page
   const { browsingWeb } = useScreen(); //Hook to have data of screen dimensions
 
+  const alert = (
+    <IonAlert
+      isOpen={showAlert}
+      onDidDismiss={handleAlertCancel}
+      header={t('alert.title.confirmation') || ''}
+      message={t('alert.message.exit') || ''}
+      buttons={[
+        {
+          text: t('alert.option.cancel'),
+          role: 'cancel',
+          handler: handleAlertCancel,
+        },
+        {
+          text: t('alert.option.exit'),
+          handler: handleAlertConfirm,
+        },
+      ]}
+    />
+  );
+
   const content = (
     <>
-      <IonContent>
-        <div>
-          <HomeWelcomeCard />
-          <ActivityCardList />
-        </div>
-      </IonContent>
-      <IonAlert
-        isOpen={showAlert}
-        onDidDismiss={handleAlertCancel}
-        header={t('alert.title.confirmation') || ''}
-        message={t('alert.message.exit') || ''}
-        buttons={[
-          {
-            text: t('alert.option.cancel'),
-            role: 'cancel',
-            handler: handleAlertCancel,
-          },
-          {
-            text: t('alert.option.exit'),
-            handler: handleAlertConfirm,
-          },
-        ]}
-      />
+      {!browsingWeb && <Logo />}
+      <HomeWelcomeCard />
+      <ActivityCardList />
+      {browsingWeb && <DownloadApp />}
+      {alert}
     </>
   );
 
-  return !browsingWeb ? <AppPage>{content}</AppPage> : <>{content}</>;
+  return !browsingWeb ? <AppPage>{content}</AppPage> : <PageTemplate>{content}</PageTemplate>;
 };
 
 export default HomePage;

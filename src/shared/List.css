@@ -9,7 +9,7 @@
 
 #activity-list section {
   padding: 0 20px;
-  position: sticky;
+  /* position: sticky; */
   top: 0;
   z-index: 2;
   display: flex;
@@ -21,11 +21,13 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 40px;
 }
 
-#activity-list footer ion-item {
-  position: fixed;
-  bottom: 0;
+ion-button.sticky {
+  position: sticky;
+  bottom: 10px;
   width: 100%;
+  padding-left: 3%;
+  padding-right: 3%;
+  z-index: 100;
 }

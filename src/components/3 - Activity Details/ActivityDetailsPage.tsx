@@ -11,7 +11,8 @@ import {
   IonIcon,
   IonAlert,
   IonRow,
-  IonCard
+  IonCard,
+  IonCol
 } from '@ionic/react';
 import { shareSocialOutline } from 'ionicons/icons';
 /* Hooks */
@@ -33,6 +34,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './ActivityDetailsPage.css';
 import LoadingPage from '@pages/LoadingPage';
+import PageTemplate from '@components/web/PageTemplate';
 
 type ActivityDetailsProps = RouteComponentProps<{ id: string }>;
 
@@ -43,7 +45,7 @@ const ActivityDetailsPage: React.FC<ActivityDetailsProps> = ({ match }) => {
   const { shareActivity, showAlert, setShowAlert } = useShare(match.params.id); //Hook to share a link to the activity
 
   const header = (
-    <IonHeader mode="ios" collapse="fade" class="ion-no-border">
+    <IonHeader mode="ios" collapse="fade" class="ion-no-border sticky">
       <IonToolbar>
         {/* Back button */}
         <IonButtons slot="start">
@@ -61,9 +63,10 @@ const ActivityDetailsPage: React.FC<ActivityDetailsProps> = ({ match }) => {
   );
 
   const content = activityData ? (
-    <IonContent>
+    <>
       <ActivityAvailability activityId={match.params.id} />
-      <IonRow class="ion-justify-content-center ion-margin-top">
+      {!browsingWeb && header}
+      <IonRow class="ion-justify-content-center ion-margin-top limits-content">
         <section id="activity-section-info" className="ion-margin-horizontal">
           <IonCard id="activity-image-card" class="ion-no-margin" mode="ios">
             <Swiper
@@ -75,7 +78,7 @@ const ActivityDetailsPage: React.FC<ActivityDetailsProps> = ({ match }) => {
             >
               {activityData?.images?.map((imgUrl, index) => (
                 <SwiperSlide key={'image' + index}>
-                  <img src={imgUrl||"https://imagenes.elpais.com/resizer/2kZjFxiNoG3Pvq9dbeHPTe7aiXc=/1960x1470/cloudfront-eu-central-1.images.arcpublishing.com/prisa/RWF77A5EQGZX4QA2ABH76KQAZE.jpg"} className='img'/> 
+                  <img src={imgUrl || "https://imagenes.elpais.com/resizer/2kZjFxiNoG3Pvq9dbeHPTe7aiXc=/1960x1470/cloudfront-eu-central-1.images.arcpublishing.com/prisa/RWF77A5EQGZX4QA2ABH76KQAZE.jpg"} className='img' />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -98,18 +101,17 @@ const ActivityDetailsPage: React.FC<ActivityDetailsProps> = ({ match }) => {
           },
         ]}
       />
-    </IonContent>
+    </>
   ) : (
     <LoadingPage />
   );
 
   return !browsingWeb ? (
     <AppPage>
-      {header}
       {content}
     </AppPage>
   ) : (
-    <>{content}</>
+    <PageTemplate>{content}</PageTemplate>
   );
 };
 

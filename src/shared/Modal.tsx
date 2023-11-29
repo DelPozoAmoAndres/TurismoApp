@@ -19,7 +19,7 @@ export const Modal: React.FC<{
     if (Capacitor.getPlatform() == 'ios') {
       //const minWidth = 492;
       initialBreakpoint = minWidthIos / window.innerHeight;
-    } else if (Capacitor.getPlatform() == 'android') {
+    } else if (Capacitor.getPlatform() == 'android' && minWidthAndroid!==undefined) {
       //const minWidth = 550;
       initialBreakpoint = minWidthAndroid / window.innerHeight;
     }

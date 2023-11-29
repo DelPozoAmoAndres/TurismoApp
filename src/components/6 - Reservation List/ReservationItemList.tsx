@@ -20,9 +20,9 @@ export const ReservationItemList: React.FC<{
           width={100}
           height={80}
           alt={t('img.activity.alt') || ''}
-          className="ion-margin-end"
+          className="ion-margin-end img"
           style={{ borderRadius: 6 }}
-          src="https://imagenes.elpais.com/resizer/2kZjFxiNoG3Pvq9dbeHPTe7aiXc=/1960x1470/cloudfront-eu-central-1.images.arcpublishing.com/prisa/RWF77A5EQGZX4QA2ABH76KQAZE.jpg"
+          src={reservation.activity?.images[0]}
         />
         <IonList class="ion-no-margin">
           <IonLabel>

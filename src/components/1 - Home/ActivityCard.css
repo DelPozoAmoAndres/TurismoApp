@@ -23,7 +23,7 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-  
+
 }
 
 #card-home ion-card-content ion-card ion-card-subtitle {
@@ -32,7 +32,7 @@
   font-size: 12px;
 }
 
-#card-home ion-card-content ion-card ion-card-subtitle ion-text:first-child{
+#card-home ion-card-content ion-card ion-card-subtitle ion-text:first-child {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -64,10 +64,11 @@
 }
 
 #cards-home .swiper-wrapper,
-#categories .swiper-wrapper {
-  padding-left: 13px;
-  padding-right: 13px;
-}
+  #categories .swiper-wrapper {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
 
 #categories .swiper-wrapper {
   margin-bottom: 1%;

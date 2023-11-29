@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 /* Ionic components */
-import { IonButton, IonItem, IonList, IonSearchbar } from '@ionic/react';
+import { IonButton, IonList, IonSearchbar } from '@ionic/react';
 /* Components */
 import { ActivityItem } from '@search-activity/List/ActivityItem';
 import { ActivitySortSelect } from './ActivitySortSelect';
@@ -20,34 +20,35 @@ export const ActivityList: React.FC<{
 }> = ({ items, setSearchText, numFilters }) => {
   const { t } = useTranslation(); //Hook to change the translation without refreshing the page
   const { isMobile } = useScreen(); //Hook to have data of screen dimensions
+  const searchBar = React.useRef<HTMLIonSearchbarElement>(null);
 
+  useEffect(() => {
+    console.log(searchBar)
+    searchBar.current?.setFocus();
+  }, [searchBar,items]);
+  
   return (
     <div id="activity-list">
       <section>
         <IonSearchbar
           mode="ios"
+          ref={searchBar}
           placeholder={t('search.activity.placeholder') || ''}
           debounce={500}
           onIonInput={(e) => setSearchText(e.detail.value || '')}
         />
         <ActivitySortSelect />
       </section>
-      {items.length > 0 && (
-        <IonList>
-          {items.map((activity, index) => (
-            <ActivityItem key={'Activity' + index} activity={activity}/>
-          ))}
-        </IonList>
-      )}
-      {isMobile && (
-        <footer>
-          <IonItem lines="none">
-            <IonButton id="filters-modal" style={{ width: '100%' }} expand="block" size="default">
-              {numFilters > 0 ? t('filters.applied') + ` (${numFilters})` : t('filters.add')}
-            </IonButton>
-          </IonItem>
-        </footer>
-      )}
+      <IonList class='ion-no-padding'>
+        {items?.map((activity, index) => (
+          <ActivityItem key={'Activity' + index} activity={activity} />
+        ))}
+        {isMobile && (
+          <IonButton class='sticky' id="filters-modal" style={{ width: '100%' }} expand="block" size="default">
+            {numFilters > 0 ? t('filters.applied') + ` (${numFilters})` : t('filters.add')}
+          </IonButton>
+        )}
+      </IonList>
     </div>
   );
 };

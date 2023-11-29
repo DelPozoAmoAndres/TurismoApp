@@ -1,16 +1,15 @@
 import { IonContent, IonGrid, IonIcon, IonLabel, IonRow, IonSegment, IonSegmentButton } from '@ionic/react';
 import { useState } from 'react';
 import { PersonalData } from '@personal-area/Profile/PersonalData';
-import { Help } from '@personal-area/Profile/Help';
 import { Account } from '@personal-area/Profile/Account';
 import { useAuth } from '@contexts/AuthContexts';
 import { useTranslation } from 'react-i18next';
 import { formatDate } from '@utils/utils';
-import { bookOutline, helpCircleOutline, settingsOutline, shieldOutline } from 'ionicons/icons';
+import { bookOutline, shieldOutline } from 'ionicons/icons';
 import { useScreen } from '@hooks/useScreen';
 import { AppPage } from '@pages/AppPage';
-import { Capacitor } from '@capacitor/core';
 import React from 'react';
+import PageTemplate from '@components/web/PageTemplate';
 
 const ProfilePage: React.FC = () => {
   const auth = useAuth();
@@ -20,16 +19,9 @@ const ProfilePage: React.FC = () => {
 
   const maxWidth = 755;
   const content = (
-    <IonContent>
       <IonGrid>
-        {Capacitor.isNativePlatform() && (
-          <div className="ion-text-end ion-margin-end">
-            <IonIcon icon={settingsOutline} class="ion-text-end" />
-            <IonLabel>{t('settings.title')}</IonLabel>
-          </div>
-        )}
         <IonRow class="ion-justify-content-center">
-          <section>
+          <section className='ion-margin-bottom ion-padding-bottom'>
             <img
               src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_man_person_people_avatar_white_tone_icon_159365.png"
               width={width < 1000 ? 200 : 250}
@@ -40,21 +32,17 @@ const ProfilePage: React.FC = () => {
               </h1>
             </IonRow>
             <IonRow>
-              <IonLabel>{t('account.created.date')}</IonLabel>
+              <IonLabel>{t('account.created.date')}:</IonLabel>
             </IonRow>
-            <IonRow>
-              <h3>{formatDate(auth.user?.createdAt || null)}</h3>
+            <IonRow class='ion-margin-bottom ion-padding-bottom'>
+              <IonLabel>{formatDate(auth.user?.createdAt || null)}</IonLabel>
             </IonRow>
-          </section>
+          </section >
           {width < maxWidth && (
-            <IonSegment value={selectedTab} onIonChange={(e) => setSelectedTab(e.detail.value)}>
+            <IonSegment mode='ios' value={selectedTab} onIonChange={(e) => setSelectedTab(e.detail.value)}>
               <IonSegmentButton value="personalData">
                 <IonLabel>{t('personal.data.title.sort')}</IonLabel>
                 <IonIcon icon={bookOutline} />
-              </IonSegmentButton>
-              <IonSegmentButton value="help">
-                <IonLabel>{t('help.title.sort')}</IonLabel>
-                <IonIcon icon={helpCircleOutline} />
               </IonSegmentButton>
               <IonSegmentButton value="account">
                 <IonLabel>{t('account.title')}</IonLabel>
@@ -64,14 +52,12 @@ const ProfilePage: React.FC = () => {
           )}
           <section className="ion-margin-horizontal" style={{ width: width < maxWidth ? '100%' : 500 }}>
             {(selectedTab == 'personalData' || width >= maxWidth) && <PersonalData />}
-            {(selectedTab == 'help' || width >= maxWidth) && <Help />}
             {(selectedTab == 'account' || width >= maxWidth) && <Account />}
           </section>
         </IonRow>
       </IonGrid>
-    </IonContent>
   );
-  return !browsingWeb ? <AppPage>{content}</AppPage> : <>{content}</>;
+  return !browsingWeb ? <AppPage>{content}</AppPage> : <PageTemplate>{content}</PageTemplate>;
 };
 
 export default ProfilePage;

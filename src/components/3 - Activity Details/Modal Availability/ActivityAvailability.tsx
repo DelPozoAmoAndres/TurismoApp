@@ -72,7 +72,7 @@ export const ActivityAvailability: React.FC<{ activityId: string }> = ({ activit
         <div>
           <IonButton
             expand="block"
-            id='reservar'
+            id={auth.user?'reservar':'login-modal' }
             onClick={() => {
               auth.user 
               ? handleReserva()  

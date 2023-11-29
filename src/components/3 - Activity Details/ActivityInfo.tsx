@@ -1,6 +1,6 @@
 import React from 'react';
 /* Ionic components */
-import { IonButton, IonCardSubtitle, IonCardTitle, IonCol, IonIcon, IonLabel, IonRow, IonText } from '@ionic/react';
+import { IonButton, IonCardSubtitle, IonCardTitle, IonIcon, IonLabel, IonRow, IonText } from '@ionic/react';
 /* Models */
 import { Activity } from '@models/Activity';
 import { Role } from '@models/User';
@@ -14,13 +14,14 @@ import { useSoldOut } from '@hooks/useSoldOut';
 /* Contexts */
 import { useAuth } from '@contexts/AuthContexts';
 import { shareSocialOutline } from 'ionicons/icons';
+import Login from '@components/4 - Personal Area/Login/Login';
 
 export const ActivityInfo: React.FC<{
   activityData: Activity;
   share: () => void;
 }> = ({ activityData, share }) => {
   const { t } = useTranslation(); //Hook to change the translation without refreshing the page
-  const { browsingWeb,isMobile } = useScreen(); //Hook to have data of screen dimensions
+  const { browsingWeb, isMobile } = useScreen(); //Hook to have data of screen dimensions
   const auth = useAuth();
   const { soldOutProps } = useSoldOut(activityData?.events);
 
@@ -43,14 +44,14 @@ export const ActivityInfo: React.FC<{
         </IonLabel>
       </IonRow>
       <IonRow>
-        <IonText style={{whiteSpace: "pre-line"}}>{activityData?.description}</IonText>
+        <IonText style={{ whiteSpace: "pre-line" }}>{activityData?.description}</IonText>
       </IonRow>
       <IonRow class="ion-margin-top">
         <IonLabel>
           <strong>{t('accesibility')}</strong>
         </IonLabel>
       </IonRow>
-      <IonRow style={{whiteSpace: "pre-line"}}>{activityData?.accesibility}</IonRow>
+      <IonRow style={{ whiteSpace: "pre-line" }}>{activityData?.accesibility}</IonRow>
       <IonRow class="ion-margin-top">
         <IonLabel>
           <strong>{t('duration')}</strong>
@@ -74,20 +75,17 @@ export const ActivityInfo: React.FC<{
           {activityData?.events && activityData.events.length > 0 ? Math.min(...activityData.events.map((e) => e.price)).toString() : ''}
         </IonRow>
       )}
-      <IonCol>
-        <IonCol>
-          <section hidden={isMobile || !auth.user || auth.user?.role !== Role.administrador }>
-            <IonButton routerLink={`/admin/activity/${activityData._id}/events`} expand="block" mode="ios">
-              {t('show.events')}
-            </IonButton>
-          </section>
-          <section hidden={auth.user?.role === Role.administrador || auth.user?.role == Role.guía}>
-            <IonButton {...soldOutProps} expand="block" id="Availability-modal">
-              {activityData?.events && activityData.events.length > 0 ? t('show.availability') : t('sold.out')}
-            </IonButton>
-          </section>
-        </IonCol>
-      </IonCol>
+      <section hidden={isMobile || !auth.user || auth.user?.role !== Role.administrador}>
+        <IonButton routerLink={`/admin/activity/${activityData._id}/events`} expand="block" mode="ios">
+          {t('show.events')}
+        </IonButton>
+      </section>
+      <section className='sticky' hidden={auth.user?.role === Role.administrador || auth.user?.role == Role.guía}>
+        <IonButton {...soldOutProps} expand="block" id="login-modal">
+          {activityData?.events && activityData.events.length > 0 ? t('show.availability') : t('sold.out')}
+        </IonButton>
+      </section>
+      <Login />
     </div>
   );
 };

@@ -17,8 +17,8 @@ export const ReservationActivityData: React.FC<{
     <div className={isMobile ? 'ion-margin-horizontal' : ''} style={{maxWidth:"500px"}}>
       <IonCard>
         <IonImg
-          src="https://imagenes.elpais.com/resizer/2kZjFxiNoG3Pvq9dbeHPTe7aiXc=/1960x1470/cloudfront-eu-central-1.images.arcpublishing.com/prisa/RWF77A5EQGZX4QA2ABH76KQAZE.jpg"
-          style={{ maxWidth: isMobile ? 'none' : 500 }}
+          src={reservation?.activity?.images[0]}
+          style={{ maxWidth: isMobile ? 'none' : 500,"object-fit": "cover", "aspect-ratio": 4/3,"margin-bottom": "-10px"}}
         />
       </IonCard>
       <section hidden={isMobile}>

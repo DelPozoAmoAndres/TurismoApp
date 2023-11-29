@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { IonButton, IonIcon, IonNavLink, IonSelect, IonSelectOption } from '@ionic/react';
 import { globeOutline } from 'ionicons/icons';
-import { Language } from '../models/Language';
-import i18n from '../components/i18n/i18n';
-import { getItem } from '../utils/utils';
-import { useLanguage } from '../hooks/useLanguage';
+import { Language } from '@models/Language';
+import i18n from '@components/i18n/i18n';
+import { getItem } from '@utils/utils';
+import { useLanguage } from '@hooks/useLanguage';
 
 type LanguageSelectorProps = {
   hidden: boolean,

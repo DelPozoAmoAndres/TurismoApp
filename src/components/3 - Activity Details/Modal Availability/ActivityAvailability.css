@@ -17,7 +17,7 @@
 }
 
 #availability-modal-card ion-grid div {
-  position: fixed;
+  position: sticky;
   bottom: 0;
   left: 0;
   width: 100%;

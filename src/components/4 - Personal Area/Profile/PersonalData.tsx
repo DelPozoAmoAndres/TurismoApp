@@ -1,12 +1,11 @@
 import React from 'react';
 /* Ionic components */
 import { IonButton, IonGrid, IonIcon, IonLabel, IonRow } from '@ionic/react';
-import { logOutOutline, pencilOutline, shieldOutline } from 'ionicons/icons';
+import { logOutOutline, pencilOutline } from 'ionicons/icons';
 /* Contexts */
 import { useAuth } from '@contexts/AuthContexts';
 /* Components */
 import { UserModal } from '@search-user/Edit Modal/UserModal';
-import { ChangePasswordModal } from '@personal-area/Change Password/ChangePasswordModal';
 /* i18n */
 import { useTranslation } from 'react-i18next';
 
@@ -43,13 +42,6 @@ export const PersonalData = () => {
             </IonButton>
           </IonRow>
           <IonRow>
-            {' '}
-            <IonButton id={"password-change-modal"} style={{ width: '100%' }} expand="block">
-              <IonIcon slot="start" icon={shieldOutline} />
-              {t('personal.data.change.password')}
-            </IonButton>
-          </IonRow>
-          <IonRow>
             <IonButton color={'danger'} style={{ width: '100%' }} expand="block" onClick={()=>auth.logout()}>
               <IonIcon slot="start" icon={logOutOutline} />
               {t('log.out')}
@@ -58,7 +50,6 @@ export const PersonalData = () => {
         </section>
       </IonRow>
         {auth.user && <UserModal user={auth.user} action='edit' />}
-        <ChangePasswordModal/>
     </IonGrid>
   );
 };

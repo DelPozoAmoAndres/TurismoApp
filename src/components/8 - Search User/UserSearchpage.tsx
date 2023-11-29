@@ -27,7 +27,7 @@ const UserSearchPage: React.FC<RouteComponentProps> = () => {
   const modal = useRef<HTMLIonModalElement>(null); //Reference of the modal to close it
 
   const header = (
-    <IonHeader mode="ios" collapse="fade" class="ion-no-border">
+    <IonHeader mode="ios" collapse="fade" class="ion-no-border sticky">
       <IonToolbar>
         <IonButtons slot="start">
           <IonBackButton defaultHref="/" text={t('go.back')} />

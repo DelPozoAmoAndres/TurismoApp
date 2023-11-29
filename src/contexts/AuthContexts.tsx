@@ -4,6 +4,7 @@ import { AuthContextType } from '../models/AuthContextType';
 import { User } from '../models/User';
 import { RegisterFormData } from '../models/User';
 import { getItem, removeItem, setItem } from '../utils/utils';
+import { useIonRouter } from '@ionic/react';
 
 export const AuthContext = createContext<AuthContextType>({
   user: null,
@@ -28,6 +29,7 @@ interface Props {
 const AuthProvider: React.FC<Props> = (props) => {
   const [token, setToken] = useState<string | null>(getItem('token'));
   const [user, setUser] = useState<User | null>(null);
+  const router = useIonRouter();
 
   const register = async (formData: RegisterFormData) => {
     // Validar que las contraseñas coincidan

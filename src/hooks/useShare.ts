@@ -13,7 +13,7 @@ export const useShare = (activityId: string) => {
     //Options to configurate the text and content to share
     title: t('share.activity.title'),
     text: t('share.activity.text'),
-    url: `http://astour.es/activity/${activityId}`,
+    url: `${process.env.REACT_APP_URL}/activity/${activityId}`,
     dialogTitle: t('share.by'),
   };
 

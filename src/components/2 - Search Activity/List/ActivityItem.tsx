@@ -15,18 +15,19 @@ import { useScreen } from '@hooks/useScreen';
 /* Apis */
 import { deleteActivity } from '@apis/adminActivityApi';
 import { ActivityModal } from '@components/2 - Search Activity/Modal/ActivityModal';
+import { IonicReactProps } from '@ionic/react/dist/types/components/IonicReactProps';
 
-export const ActivityItem: React.FC<{ activity: Activity}> = ({ activity}) => {
+export const ActivityItem: React.FC<{ activity: Activity, style?:IonicReactProps["style"]}> = ({ activity, style ={}}) => {
   const { t } = useTranslation(); //Hook to change the translation without refreshing the page
   const auth = useAuth(); //Context of the user
   const { isMobile } = useScreen(); //Hook to have data of screen dimensions
   const [showDeleteAlert, setShowDeleteAlert] = useState<boolean>(false);
 
   return (
-    <IonItem id="card-search" lines="none">
-      <IonCard class="ion-no-margin" mode="ios" style={{ backgroundImage: 'url(' + activity.images[0] + ')' }}>
+    <IonItem id="card-search" lines="none" style={style}>
+      <IonCard class="ion-no-margin" mode="ios" style={{ backgroundImage: 'url(' + activity.images[0] + ')', }}>
       </IonCard>
-      <IonCard class="ion-no-margin">
+      <IonCard class="ion-no-margin" color={"light"}>
         <IonCardTitle>{activity.name}</IonCardTitle>
         <IonCardSubtitle>
           <IonText className="ion-margin-left">{activity.location}</IonText>
@@ -38,7 +39,7 @@ export const ActivityItem: React.FC<{ activity: Activity}> = ({ activity}) => {
         <IonText>
           <p>{activity.description}</p>
         </IonText>
-        <IonCardContent class="ion-no-padding">
+        <IonCardContent class="ion-no-padding" style={{position:"absolute", bottom:0, width : "90%"}}>
             <div hidden={!(auth.user?.role === Role.administrador && !isMobile)}>
               <IonButton color={'danger'} onClick={() => activity._id && setShowDeleteAlert(true)} >
                 <IonIcon icon={trashOutline} />

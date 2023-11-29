@@ -6,7 +6,7 @@
   "alert.account.created.message": "Cuenta creada correctamente",
   "alert.option.cancel": "Cancelar",
   "alert.option.exit": "Salir",
-  "welcome.title": "Bienvenido a Asturias",
+  "welcome.title": "Asturias",
   "welcome.message": "Descubre los mejores servicios de turismo en Asturias. Desde playas paradisíacas hasta montañas impresionantes, ¡aquí encontrarás todo lo que necesitas para disfrutar de tus vacaciones!",
   "welcome.search": "Buscar actividades",
   "welcome.categories.title": "Categorias",
@@ -87,7 +87,7 @@
   "account.delete": "Eliminar cuenta",
   "number.of.seats": "Numero de personas",
   "number.of.seats.placeholder": "Introduce el número de personas que quieren asistir",
-  "cancel.policy": "Cancelación gratuita 24 hasta 24 horas antes",
+  "cancel.policy": "Cancelación gratuita hasta 24 horas antes",
   "privacy.policy": "Acepto la politica de privacidad y las condiciones generales",
   "total.price": "Precio total",
   "home.title": "Inicio",
@@ -131,5 +131,10 @@
   "payment.success": "Pago realizado correctamente",
   "reservation.status.check.reservations":"Puedes ver todas tus reservas en el apartado de reservas",
   "go.to.reservations": "Ir a reservas",
-  "go.to.home": "Ir al inicio"
+  "go.to.home": "Ir al inicio",
+  "reservations.empty": "No has realizado aún ninguna reserva",
+  "settings.title": "Ajustes",
+  "order": "Realizar una reserva",
+  "reservation.data.title": "Datos de la reserva",
+  "welcome.popular.title": "Los +Elegidos"
 }

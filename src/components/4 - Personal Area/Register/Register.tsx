@@ -13,7 +13,13 @@ import { useRegister } from '@hooks/useRegister';
 import { useTranslation } from 'react-i18next';
 import { Modal } from '@shared/Modal';
 
-const Register: React.FC = () => {
+import './Register.css';
+
+interface RegisterProps {
+  loginModal: React.MutableRefObject<HTMLIonModalElement | null>;
+}
+
+const Register: React.FC<RegisterProps> = ({loginModal}) => {
   const { formData, showAlert, loading, error, setShowAlert, setFormData, handleRegister } = useRegister();
   const modal = useRef<HTMLIonModalElement>(null); //Reference of the modal to close it
   const { t } = useTranslation(); //Hook to change the translation without refreshing the page
@@ -21,7 +27,7 @@ const Register: React.FC = () => {
   return (
     <Modal id={'register-modal-card'} tittle={t('sign.up')} trigger={'register-modal'} modal={modal} minWidthAndroid={550} minWidthIos={492}>
       <form onSubmit={handleRegister}>
-        <IonGrid class="ion-no-padding">
+        <IonGrid class="ion-no-padding ion-margin-horizontal">
           <IonItem lines="none">
             <Field
               label={t('personal.data.name')}
@@ -118,7 +124,7 @@ const Register: React.FC = () => {
         isOpen={showAlert}
         onDidDismiss={() => {
           setShowAlert(false);
-          error ?? modal.current?.dismiss();
+          error ?? (modal.current?.dismiss() && loginModal.current?.dismiss());
         }}
         header={error ? t('alert.title.error') || 'Error' : t('alert.title.confirmation') || ''}
         message={error ?? (t('alert.account.created.message') || '')}

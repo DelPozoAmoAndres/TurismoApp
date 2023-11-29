@@ -13,8 +13,8 @@ export const Tabs = () => {
   );
   const PersonalAreaTab = (
     <IonTabButton tab="tab2" onClick={() => document.getElementById('login-modal')?.click()}>
-      <IonIcon icon={personOutline} id="login-modal" />
-      <IonLabel>{t('personalArea.title')}</IonLabel>
+      <IonIcon icon={personOutline} />
+      <IonLabel>{t('account.title')}</IonLabel>
     </IonTabButton>
   );
 

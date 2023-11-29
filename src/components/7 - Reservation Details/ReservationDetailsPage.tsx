@@ -1,7 +1,7 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router';
 /* Ionic Components */
-import { IonButton, IonCard, IonContent, IonRow } from '@ionic/react';
+import { IonBackButton, IonButton, IonButtons, IonCard, IonContent, IonHeader, IonRow, IonToolbar } from '@ionic/react';
 import { cancelReservation } from '@apis/reservationApi';
 /* i18n */
 import { useTranslation } from 'react-i18next';
@@ -13,18 +13,28 @@ import { ReservationActivityData } from './ReservationActivityData';
 import { ReservationData } from './ReservationData';
 import LoadingPage from '@pages/LoadingPage';
 import { AddReviewModal } from '@reservation-details/Add Review/AddReviewModal';
+import { AppPage } from '@pages/AppPage';
 
 type ReservationDetailsProps = RouteComponentProps<{ id: string }>;
 
 const ReservationDetailsPage: React.FC<ReservationDetailsProps> = ({ match }) => {
   const reservation = useReservationData(match.params.id); //Hook to have reservation data
-  const { isMobile } = useScreen(); //Hook to have data of screen dimensions
+  const { isMobile, browsingWeb } = useScreen(); //Hook to have data of screen dimensions
   const { t } = useTranslation(); //Hook to change the translation without refreshing the page
 
-  console.log(reservation?.activity?._id)
+  const header = (
+    <IonHeader mode="ios" collapse="fade" class="ion-no-border sticky">
+      <IonToolbar>
+        <IonButtons slot="start">
+          <IonBackButton defaultHref="/" text={t('go.back')} />
+        </IonButtons>
+      </IonToolbar>
+    </IonHeader>
+  );
 
-  return reservation ? (
+  const content = reservation ? (
     <IonContent>
+      {!browsingWeb && header}
       <IonRow class="ion-justify-content-center ion-margin-top">
         <ReservationActivityData reservation={reservation} />
         <section className={isMobile ? 'ion-margin-horizontal' : ''} style={{ width: isMobile ? '100%' : 'auto' }}>
@@ -49,6 +59,8 @@ const ReservationDetailsPage: React.FC<ReservationDetailsProps> = ({ match }) =>
   ) : (
     <LoadingPage />
   );
+
+  return !browsingWeb ? <AppPage>{content}</AppPage> : <>{content}</>;
 };
 
 export default ReservationDetailsPage;

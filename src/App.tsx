@@ -82,8 +82,11 @@ const AppIndex: React.FC = () => {
               <Route exact path="/">
                 {Capacitor.isNativePlatform() ? <Redirect to="/movil" /> : <Redirect to="/home" />}
               </Route>
+              <Route exact path="/home">
+                {Capacitor.isNativePlatform() ? <Redirect to="/movil" /> : <Redirect to="/home" />}
+              </Route>
               <Route path="/movil" render={() => <TabBar />} />
-              <Route exact path="/home" component={HomePage} />
+              <Route exact path="/home"component={HomePage} />
               <Route exact path="/buscar" component={SearchActivityPage} />
               <Route exact path="/activity/:id" component={ActivityDetailsPage} />
               <PrivateRoute path="/activity/:id/reservar/" component={ReservationPage} alternativePath="/" />
@@ -98,7 +101,6 @@ const AppIndex: React.FC = () => {
               <AdminRoute exact path="/admin/user/:id" component={UserDetailsPage} />
               <AdminRoute exact path="/admin/activity/:id/events/" component={EventsPage}/>
               {/*<PrivateRoute exact path="/nextEvents/" component={NextEventsPage} alternativePath="/" />*/}
-              
             </IonRouterOutlet>
           </AppPage>
         </IonReactRouter>

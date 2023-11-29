@@ -23,7 +23,7 @@ export const Button: React.FC<ButtonProps> = ({ mode, icon, text, role, routeLin
     <IonNavLink
       hidden={isMobile || !((auth.user && role === null) || auth.user?.role === role || (role === undefined && auth.token === null))}
     >
-      <IonButton {...props} mode={mode || 'ios'} {...routeProps} id={id}>
+      <IonButton routerDirection='root' {...props} mode={mode || 'ios'} {...routeProps} id={id}>
         <IonIcon icon={icon} />
         <p>{text}</p>
       </IonButton>

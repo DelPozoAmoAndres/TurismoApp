@@ -1,6 +1,7 @@
 #activity-info {
   max-width: 600px;
   width: 100%;
+  height: fit-content;
 }
 
 #activity-info ion-row {
@@ -24,17 +25,16 @@
 }
 
 @media only screen and (width <= 440px) {
-  #activity-info  ion-col  ion-col section  {
-    position: fixed;
+  #activity-info section.sticky {
+    position: -webkit-sticky;
+    position: sticky;
     bottom: 0;
-    left: 0;
+    left: 0; 
     width: 100%;
-    padding: 2.5%;
+    padding-bottom: 2dvh;
     /* background-color: var(--background); */
-    z-index: 2;
   }
   #activity-info {
     min-width: auto;
-    margin-bottom: 70px;
   }
 }

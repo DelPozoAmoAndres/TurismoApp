@@ -13,12 +13,14 @@
   color: white;
 }
 
-#activity-section-info {
-  overflow: hidden;
-}
-
 .swiper-slide .img {
   object-fit: cover;
   aspect-ratio: 4/3;
   margin-bottom: -10px;
+}
+
+ion-header.sticky {
+  position:sticky;
+  top: 0;
+  background-color: var(--background);
 }

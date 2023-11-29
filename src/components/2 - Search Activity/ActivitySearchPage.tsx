@@ -17,16 +17,17 @@ import "@shared/SearchPage.css"
 /* i18n */
 import { useTranslation } from 'react-i18next';
 import { ActivityFilter } from '@models/Activity';
+import PageTemplate from '@components/web/PageTemplate';
 
 const ActivitySearchPage: React.FC<RouteComponentProps> = () => {
-  const defaultFilters : ActivityFilter = { } 
-  const { setSearchText, handleFilter, filters, items } = useSearch(getActivityList,defaultFilters);
+  const defaultFilters: ActivityFilter = {}
+  const { setSearchText, handleFilter, filters, items } = useSearch(getActivityList, defaultFilters);
   const { t } = useTranslation(); //Hook to change the translation without refreshing the page
   const { isMobile, browsingWeb } = useScreen(); //Hook to have data of screen dimensions
   const modal = useRef<HTMLIonModalElement>(null); //Reference of the modal to close it
 
   const header = (
-    <IonHeader mode="ios" collapse="fade" class="ion-no-border">
+    <IonHeader mode="ios" collapse="fade" class="ion-no-border sticky">
       <IonToolbar>
         <IonButtons slot="start">
           <IonBackButton defaultHref="/" text={t('go.back')} />
@@ -36,39 +37,39 @@ const ActivitySearchPage: React.FC<RouteComponentProps> = () => {
   );
 
   const content = (
-    <div id="activity-search-page">
-      {!isMobile ? (
-        <ActivityFiltersView filters={filters} applyFilters={handleFilter} />
-      ) : (
-        <Modal
-          id="modal-filters"
-          minWidthAndroid={490}
-          minWidthIos={540}
-          modal={modal}
-          trigger="filters-modal"
-          tittle={t('filters.title')}
-        >
-          <ActivityFiltersView
-            filters={filters}
-            applyFilters={(filters: ActivityFilter) => {
-              handleFilter(filters);
-              modal.current?.dismiss();
-            }}
-          />
-        </Modal>
-      )}
-      <IonContent>
+    
+      <div id="activity-search-page" className='limits-content'>
+        {!isMobile ? (
+          <ActivityFiltersView filters={filters} applyFilters={handleFilter} />
+        ) : (
+          <Modal
+            id="modal-filters"
+            minWidthAndroid={Infinity}
+            minWidthIos={Infinity}
+            modal={modal}
+            trigger="filters-modal"
+            tittle={t('filters.title')}
+          >
+            <ActivityFiltersView
+              filters={filters}
+              applyFilters={(filters: ActivityFilter) => {
+                handleFilter(filters);
+                modal.current?.dismiss();
+              }}
+            />
+          </Modal>
+        )}
+
+        {!browsingWeb && header}
         <ActivityList setSearchText={setSearchText} items={items} numFilters={Object.values(filters).filter((v) => v !== null).length} />
-      </IonContent>
-    </div>
+      </div>
   );
   return !browsingWeb ? (
     <AppPage>
-      {header}
       {content}
     </AppPage>
   ) : (
-    <>{content}</>
+    <PageTemplate>{content}</PageTemplate>
   );
 };
 
