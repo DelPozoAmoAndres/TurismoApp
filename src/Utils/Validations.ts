@@ -1,18 +1,18 @@
-export const lengthValidation = (length: number, value: string) => {
+const lengthValidation = (length: number, value: string) => {
   return value.length >= length;
 };
 
-export const emailValidation = (email: string) => {
+const emailValidation = (email: string) => {
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   return emailRegex.test(email);
 };
 
-export const searchValidation = (search: string) => {
+const searchValidation = (search: string) => {
   const searchRegex = /^[A-Z0-9._%+-@]/i;
   return searchRegex.test(search);
 };
 
-export const dateValidation = (value: string) => {
+const dateValidation = (value: string) => {
   //Cremos un objeto que represente el día actual
   const today = new Date(Date.now());
   today.setHours(0);
@@ -30,7 +30,7 @@ export const dateValidation = (value: string) => {
   }
 };
 
-export const telephoneValidation = (value: string) => {
+const telephoneValidation = (value: string) => {
   // Eliminar cualquier espacio en blanco o guiones del número de teléfono
   const cleanedPhoneNumber = value.replace(/\s|-/g, '');
 
@@ -38,3 +38,5 @@ export const telephoneValidation = (value: string) => {
   const phoneRegex = /^\d{9}$/;
   return phoneRegex.test(cleanedPhoneNumber);
 };
+
+export {lengthValidation, emailValidation, searchValidation, dateValidation, telephoneValidation}
