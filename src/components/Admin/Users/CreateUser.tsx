@@ -4,9 +4,9 @@ import { AuthContext } from '@contexts/AuthContexts';
 import { RouteComponentProps } from 'react-router';
 import Spinner from '@shared/Spinner';
 import { Field } from '@shared/Field';
-import { dateValidation, emailValidation, lengthValidation, telephoneValidation } from '@utils/Validations';
+import { dateValidation, emailValidation, lengthValidation, telephoneValidation } from '@form-utils/Validations';
 import { RegisterFormData } from '@models/User';
-import { filterPropertiesNotNull, formatDate } from '@utils/Utils';
+import { filterPropertiesNotNull, formatDate } from '@form-utils/Utils';
 import { AxiosError } from 'axios';
 
 const CreateUser: React.FC<RouteComponentProps> = ({ history }) => {

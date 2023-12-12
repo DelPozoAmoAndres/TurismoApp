@@ -1,7 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { RegisterFormData } from '../models/User';
 import { useAuth } from '../contexts/AuthContexts';
-import { filterPropertiesNotNull } from '@utils/Utils';
+import { filterPropertiesNotNull } from '@form-utils/Utils';
 import { AxiosError } from 'axios';
 
 export const useRegister = () => {

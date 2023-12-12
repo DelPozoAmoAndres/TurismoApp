@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getEvents } from '../apis/activityApi';
-import { formatDate } from '@utils/Utils';
+import { formatDate } from '@form-utils/Utils';
 import { Event } from '../models/Activity';
 
 export const useActivityAvailability = (activityId: string) => {

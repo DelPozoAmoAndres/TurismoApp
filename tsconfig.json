@@ -29,7 +29,7 @@
       "@models/*": ["models/*"],
       "@shared/*": ["shared/*"],
       "@theme/*": ["theme/*"],
-      "@utils/*": ["utils/*"],
+      "@form-utils/*": ["utils/*"],
 
       // Components
       "@menu/*": ["components/0 - Menu/*"],

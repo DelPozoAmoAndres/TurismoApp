@@ -17,7 +17,7 @@ import {
 import { RouteComponentProps } from 'react-router';
 import { Role, User, UserFilter } from '@models/User'; // Importa el modelo de usuario
 import { getUserList } from '@apis/adminUserApi';
-import { searchValidation } from '@utils/Validations';
+import { searchValidation } from '@form-utils/Validations';
 
 type UserListProps = RouteComponentProps;
 

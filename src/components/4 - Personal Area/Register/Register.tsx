@@ -5,8 +5,8 @@ import { IonItem, IonButton, IonAlert, IonGrid } from '@ionic/react';
 import Spinner from '@shared/Spinner';
 import { Field } from '@shared/Field';
 /* Utils */
-import { dateValidation, emailValidation, lengthValidation, telephoneValidation } from '@utils/Validations';
-import { formatDate } from '@utils/Utils';
+import { dateValidation, emailValidation, lengthValidation, telephoneValidation } from '@form-utils/Validations';
+import { formatDate } from '@form-utils/Utils';
 /* Hooks */
 import { useRegister } from '@hooks/useRegister';
 /* i18n */

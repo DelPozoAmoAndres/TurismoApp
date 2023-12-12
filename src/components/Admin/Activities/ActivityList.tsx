@@ -15,7 +15,7 @@ import {
   IonInput,
 } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
-import { searchValidation } from '@utils/Validations';
+import { searchValidation } from '@form-utils/Validations';
 import { Activity, ActivityFilter, ActivityState } from '@models/Activity';
 import { getActivityList } from '@apis/activityApi';
 

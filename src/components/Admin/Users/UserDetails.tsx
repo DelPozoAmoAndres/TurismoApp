@@ -3,7 +3,7 @@ import { IonPage, IonContent, IonButton, IonHeader, IonToolbar, IonTitle, IonLis
 import { RouteComponentProps } from 'react-router';
 import { deleteUser, editUser, getUser } from '@apis/adminUserApi'; // Importa los métodos para obtener información del usuario y las reservas
 import { User } from '@models/User';
-import { formatDate } from '@utils/Utils';
+import { formatDate } from '@form-utils/Utils';
 
 type UserDetailsProps = RouteComponentProps<{ id: string }>;
 

@@ -3,7 +3,7 @@ import { IonPage, IonContent, IonItem, IonButton, IonAlert, IonHeader, IonToolba
 import { RouteComponentProps } from 'react-router';
 import Spinner from '@shared/Spinner';
 import { Field } from '@shared/Field';
-import { lengthValidation } from '@utils/Validations';
+import { lengthValidation } from '@form-utils/Validations';
 import { Activity, ActivityState } from '@models/Activity';
 import { createActivity } from '@apis/adminActivityApi';
 import { AxiosError } from 'axios';

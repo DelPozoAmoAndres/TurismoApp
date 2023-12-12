@@ -30,7 +30,7 @@ import '@ionic/react/css/display.css';
 import '@theme/variables.css';
 /* Utility */
 import axios from 'axios';
-import { getItem } from '@utils/Utils';
+import { getItem } from '@form-utils/Utils';
 /* i18n */
 import { I18nextProvider } from 'react-i18next';
 import i18n from '@components/i18n/i18n';

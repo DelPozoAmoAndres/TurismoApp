@@ -7,7 +7,7 @@ import { Modal } from '@shared/Modal';
 /* i18n */
 import { useTranslation } from 'react-i18next';
 /* Utils */
-import { formatDateToTime } from '@utils/Utils';
+import { formatDateToTime } from '@form-utils/Utils';
 /* Contexts */
 import { useAuth } from '@contexts/AuthContexts';
 /* Hooks */

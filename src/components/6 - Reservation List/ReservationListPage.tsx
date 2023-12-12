@@ -8,7 +8,7 @@ import { useReservationList } from '@hooks/useReservationList';
 import { AppPage } from '@pages/AppPage';
 import { ReservationItemList } from '@reservation-list/ReservationItemList';
 /* Utils */
-import { formatDate } from '@utils/Utils';
+import { formatDate } from '@form-utils/Utils';
 /* Style */
 import "./ReservationList.css";
 /* i18n */
