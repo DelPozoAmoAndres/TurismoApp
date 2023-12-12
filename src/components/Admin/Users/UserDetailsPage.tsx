@@ -2,7 +2,7 @@ import React from 'react'
 import { IonButton, IonCard, IonGrid, IonLabel, IonRow } from '@ionic/react'
 import { useScreen } from '@hooks/useScreen'
 import { useTranslation } from 'react-i18next'
-import { formatDate } from '@form-utils/Utils'
+// import { formatDate } from '@form-utils/Utils'
 import { ReservationItemList } from '@reservation-list/ReservationItemList'
 import { RouteComponentProps } from 'react-router'
 import { useUserReservationList } from '@hooks/useUserReservationList'
@@ -53,7 +53,7 @@ const UserDetailsPage: React.FC<UserDetailsProps> = ({ match }) => {
                             <IonLabel><strong>{t('account.created.date')}</strong></IonLabel>
                         </IonRow>
                         <IonRow>
-                            {formatDate(user?.createdAt || null)}
+                            {/* {formatDate(user?.createdAt || null)} */}
                         </IonRow>
                         <div className=" ion-no-padding ion-margin-top">
                             <IonButton id={user._id} style={{ width: '100%' }} expand="block">
@@ -71,7 +71,7 @@ const UserDetailsPage: React.FC<UserDetailsProps> = ({ match }) => {
                             <div key={'reservationsGroup' + index} className="ion-margin-bottom">
                                 <IonRow class="ion-padding-start ion-padding-vertical">
                                     <IonLabel>
-                                        <strong>{formatDate(reservationGroup.dateFrom) + '-----' + formatDate(reservationGroup.dateTo)}</strong>
+                                        {/* <strong>{formatDate(reservationGroup.dateFrom) + '-----' + formatDate(reservationGroup.dateTo)}</strong> */}
                                     </IonLabel>
                                 </IonRow>
                                 <IonCard>

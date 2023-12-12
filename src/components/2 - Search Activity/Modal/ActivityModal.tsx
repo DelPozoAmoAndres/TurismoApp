@@ -10,7 +10,7 @@ import { Activity, ActivityState } from '@models/Activity';
 /* Styles */
 import "./ActivityModal.css";
 /* Utils */
-import { uploadImage } from '@form-utils/Utils';
+// import { uploadImage } from '@form-utils/Utils';
 /* Apis */
 import { createActivity, editActivity } from '@apis/adminActivityApi';
 /* i18n */
@@ -33,10 +33,10 @@ export const ActivityModal: React.FC<{ activity: Activity, action: "add" | "edit
                         <input type="file" id="file-input" accept="image/*"
                             onChange={(e) => {
                                 const fr = new FileReader();
-                                uploadImage(fr, e,
-                                    async () => {
-                                        formData && setFormData({ ...formData, images:  [fr.result] })
-                                    })
+                                // uploadImage(fr, e,
+                                //     async () => {
+                                //         formData && setFormData({ ...formData, images:  [fr.result] })
+                                //     })
                             }} />
                     </IonRow>
                     <IonButton expand='block'>

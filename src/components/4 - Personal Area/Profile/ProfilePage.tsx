@@ -4,7 +4,7 @@ import { PersonalData } from '@personal-area/Profile/PersonalData';
 import { Account } from '@personal-area/Profile/Account';
 import { useAuth } from '@contexts/AuthContexts';
 import { useTranslation } from 'react-i18next';
-import { formatDate } from '@form-utils/Utils';
+// import { formatDate } from '@form-utils/Utils';
 import { bookOutline, shieldOutline } from 'ionicons/icons';
 import { useScreen } from '@hooks/useScreen';
 import { AppPage } from '@pages/AppPage';
@@ -35,7 +35,7 @@ const ProfilePage: React.FC = () => {
               <IonLabel>{t('account.created.date')}:</IonLabel>
             </IonRow>
             <IonRow class='ion-margin-bottom ion-padding-bottom'>
-              <IonLabel>{formatDate(auth.user?.createdAt || null)}</IonLabel>
+              {/* <IonLabel>{formatDate(auth.user?.createdAt || null)}</IonLabel> */}
             </IonRow>
           </section >
           {width < maxWidth && (

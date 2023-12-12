@@ -3,7 +3,7 @@ import { IonItem, IonLabel, IonInput, IonButton, IonSelect, IonSelectOption, Ion
 import { Role, User } from '@models/User';
 import { getUserList } from '@apis/adminUserApi';
 import { Event } from '@models/Activity';
-import { filterPropertiesNotNull, formatDate } from '@form-utils/Utils';
+// import { filterPropertiesNotNull, formatDate } from '@form-utils/Utils';
 import { createEvent } from '@apis/adminActivityApi';
 import { useLanguage } from '@hooks/useLanguage';
 
@@ -32,17 +32,17 @@ const CreateEvent: React.FC<CreateEventProps> = ({ activityId }) => {
   }, []);
 
   const handleAddEvent = () => {
-    createEvent(
-      activityId,
-      formData,
-      filterPropertiesNotNull({
-        repeatDays,
-        repeatType,
-        repeatStartDate,
-        repeatEndDate,
-        time,
-      })
-    );
+    // createEvent(
+    //   activityId,
+    //   formData,
+    //   filterPropertiesNotNull({
+    //     repeatDays,
+    //     repeatType,
+    //     repeatStartDate,
+    //     repeatEndDate,
+    //     time,
+    //   })
+    // );
   };
 
   const handleRepeatTypeChange = (e: CustomEvent) => {
@@ -155,7 +155,7 @@ const CreateEvent: React.FC<CreateEventProps> = ({ activityId }) => {
           <IonLabel position="stacked">Día</IonLabel>
           <IonInput
             type="datetime-local"
-            value={formatDate(formData?.date, true)}
+            // value={formatDate(formData?.date, true)}
             onIonChange={(e) => {
               setFormData({
                 ...formData,

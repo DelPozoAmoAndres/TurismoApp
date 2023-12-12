@@ -7,7 +7,7 @@ import { Modal } from '@shared/Modal';
 /* i18n */
 import { useTranslation } from 'react-i18next';
 /* Utils */
-import { formatDateToTime } from '@form-utils/Utils';
+// import { formatDateToTime } from '@form-utils/Utils';
 /* Contexts */
 import { useAuth } from '@contexts/AuthContexts';
 /* Hooks */
@@ -61,7 +61,7 @@ export const ActivityAvailability: React.FC<{ activityId: string }> = ({ activit
                     else setSelectedEvent(null);
                   }}
                 >
-                  {`${formatDateToTime(e.date)}`}
+                  {/* {`${formatDateToTime(e.date)}`} */}
                   <br />
                   {e.language ? e.language : 'Español'} <br /> {e.price + '€'}
                 </IonButton>

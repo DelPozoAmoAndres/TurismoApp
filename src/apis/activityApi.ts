@@ -1,11 +1,13 @@
 import axios from 'axios';
-import { filterPropertiesNotNull } from '@form-utils/Utils';
+// import { filterPropertiesNotNull } from '@form-utils/Utils';
 import { Activity, ActivityFilter, Event } from '@models/Activity';
 
 const baseUrl = `${process.env.REACT_APP_API_URL}/activity`;
 
 export const getActivityList = async (searchString = '', filters: ActivityFilter): Promise<[]> => {
-  const filtersActived: Partial<Record<string, unknown>> = filterPropertiesNotNull(filters);
+  // const filtersActived: Partial<Record<string, unknown>> = filterPropertiesNotNull(filters);
+  const filtersActived: Partial<Record<string, unknown>> = filters;
+
   const params = new URLSearchParams({ searchString, ...filtersActived }).toString();
   return axios.get(`${baseUrl}/list?${params}`).then((res) => res.data);
 };

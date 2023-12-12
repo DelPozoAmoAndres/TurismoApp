@@ -3,7 +3,7 @@ import { IonButton, IonIcon, IonNavLink, IonSelect, IonSelectOption } from '@ion
 import { globeOutline } from 'ionicons/icons';
 import { Language } from '@models/Language';
 import i18n from '@components/i18n/i18n';
-import { getItem } from '@form-utils/Utils';
+// import { getItem } from '@form-utils/Utils';
 import { useLanguage } from '@hooks/useLanguage';
 
 type LanguageSelectorProps = {
@@ -21,7 +21,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({hidden}) => {
 
   return (
     <IonNavLink hidden={hidden} >
-      <IonButton expand="block" disabled={getItem('i18nextLng') === null}>
+      {/* <IonButton expand="block" disabled={getItem('i18nextLng') === null}>
         <IonIcon slot="start" icon={globeOutline} />
         <IonSelect
           style={{ width: 'auto' }}
@@ -38,7 +38,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({hidden}) => {
             </IonSelectOption>
           ))}
         </IonSelect>
-      </IonButton>
+      </IonButton> */}
     </IonNavLink>
   );
 };

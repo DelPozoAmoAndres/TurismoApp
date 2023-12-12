@@ -6,7 +6,7 @@ import Spinner from '@shared/Spinner';
 import { Field } from '@shared/Field';
 import { dateValidation, emailValidation, lengthValidation, telephoneValidation } from '@form-utils/Validations';
 import { RegisterFormData } from '@models/User';
-import { filterPropertiesNotNull, formatDate } from '@form-utils/Utils';
+// import { filterPropertiesNotNull, formatDate } from '@form-utils/Utils';
 import { AxiosError } from 'axios';
 
 const CreateUser: React.FC<RouteComponentProps> = ({ history }) => {
@@ -30,7 +30,7 @@ const CreateUser: React.FC<RouteComponentProps> = ({ history }) => {
       e.preventDefault();
       setLoading(true);
       setError(null);
-      await auth.register(filterPropertiesNotNull(formData));
+      // await auth.register(filterPropertiesNotNull(formData));
     } catch (error: unknown) {
       console.error(error);
       if (error instanceof Error || error instanceof AxiosError) setError(error?.message ?? 'Ha habido un error en el servidor.');
@@ -99,7 +99,9 @@ const CreateUser: React.FC<RouteComponentProps> = ({ history }) => {
                   birthday: new Date(e.detail.value),
                 });
               }}
-              value={formatDate(formData.birthday || null)}
+              value={""
+              // formatDate(formData.birthday || null)
+            }
             />
           </IonItem>
           <IonItem lines="none">

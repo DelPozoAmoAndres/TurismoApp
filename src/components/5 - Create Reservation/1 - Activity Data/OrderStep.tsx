@@ -2,7 +2,7 @@ import React from 'react';
 /* Ionic Components */
 import { IonButton, IonCardSubtitle, IonCardTitle, IonCol, IonLabel, IonRow, IonTitle } from '@ionic/react';
 /* Utils */
-import { formatDate } from '@form-utils/Utils';
+// import { formatDate } from '@form-utils/Utils';
 /* Contexts */
 import { useReservation } from '@contexts/ReservationContext';
 /* i18n */
@@ -34,7 +34,7 @@ export const OrderStep: React.FC = () => {
           <IonCardSubtitle>{activity?.location}</IonCardSubtitle>
         </IonRow>
         <IonRow class="ion-margin-top ion-justify-content-start">
-          <IonLabel>{formatDate(event?.date || null, true)}</IonLabel>
+          {/* <IonLabel>{formatDate(event?.date || null, true)}</IonLabel> */}
         </IonRow>
         <IonRow class="ion-margin-top ion-justify-content-start">
           <IonLabel>

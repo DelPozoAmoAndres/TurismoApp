@@ -1,7 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { RegisterFormData } from '../models/User';
 import { useAuth } from '../contexts/AuthContexts';
-import { filterPropertiesNotNull } from '@form-utils/Utils';
+// import { filterPropertiesNotNull } from '@form-utils/Utils';
 import { AxiosError } from 'axios';
 
 export const useRegister = () => {
@@ -25,7 +25,7 @@ export const useRegister = () => {
       e.preventDefault();
       setLoading(true);
       setError(null);
-      await auth.register(filterPropertiesNotNull(formData));
+      // await auth.register(filterPropertiesNotNull(formData));
     } catch (error: unknown) {
       console.error(error);
       if (error instanceof Error || error instanceof AxiosError) setError(error?.message ?? 'Ha habido un error en el servidor.');
