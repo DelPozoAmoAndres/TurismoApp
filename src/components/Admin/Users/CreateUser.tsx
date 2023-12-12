@@ -4,7 +4,7 @@ import { AuthContext } from '@contexts/AuthContexts';
 import { RouteComponentProps } from 'react-router';
 import Spinner from '@shared/Spinner';
 import { Field } from '@shared/Field';
-import { dateValidation, emailValidation, lengthValidation, telephoneValidation } from '@form-utils/Validations';
+// import { dateValidation, emailValidation, lengthValidation, telephoneValidation } from '@form-utils/Validations';
 import { RegisterFormData } from '@models/User';
 // import { filterPropertiesNotNull, formatDate } from '@form-utils/Utils';
 import { AxiosError } from 'axios';
@@ -60,7 +60,7 @@ const CreateUser: React.FC<RouteComponentProps> = ({ history }) => {
               placeholder="Introduzca su nombre y apellidos"
               type="text"
               onIonInput={(e) => setFormData({ ...formData, name: e.detail.value })}
-              validationFn={(e) => lengthValidation(8, e)}
+              validationFn={(e) => true}
               value={formData.name}
             />
           </IonItem>
@@ -71,7 +71,7 @@ const CreateUser: React.FC<RouteComponentProps> = ({ history }) => {
               placeholder="Introduzca su correo electronico"
               type="email"
               onIonInput={(e) => setFormData({ ...formData, email: e.detail.value })}
-              validationFn={emailValidation}
+              validationFn={(e) => true}
               value={formData.email}
             />
           </IonItem>
@@ -82,7 +82,7 @@ const CreateUser: React.FC<RouteComponentProps> = ({ history }) => {
               placeholder="Introduzca su número de teléfono"
               type="tel"
               onIonInput={(e) => setFormData({ ...formData, telephone: e.detail.value })}
-              validationFn={telephoneValidation}
+              validationFn={(e) => true}
               value={formData.telephone ?? ""}
             />
           </IonItem>
@@ -91,7 +91,7 @@ const CreateUser: React.FC<RouteComponentProps> = ({ history }) => {
               label="Fecha de nacimiento (Opcional)"
               errorText="Seleccione una fecha anterior a hoy"
               placeholder="Seleccione una fecha"
-              validationFn={dateValidation}
+              validationFn={(e) => true}
               type="date"
               onIonInput={(e) => {
                 setFormData({
