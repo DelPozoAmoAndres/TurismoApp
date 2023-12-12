@@ -28,11 +28,12 @@ jobs:
     
     - name: Install dependencies
       run: |
+        npm cache clean -f
         npm install 
         npm install -g @ionic/cli native-run cordova-res
 
     - name: Build Ionic App
-      run: npm run ionic:build 
+      run: npm run ionic:serve
 
     - name: Sync and Copy Capacitor Assets
       run: |
