@@ -10,9 +10,11 @@ export const Modal: React.FC<{
   modal: React.RefObject<HTMLIonModalElement>;
   minWidthIos: number;
   minWidthAndroid: number;
-  trigger: string;
+  trigger?: string;
   tittle: string;
-}> = ({ id, tittle, children, modal, trigger, minWidthAndroid, minWidthIos }) => {
+  isOpen?: boolean;
+  setOpen?: (isOpen: boolean) => void;
+}> = ({ id, tittle, children, modal, trigger, minWidthAndroid, minWidthIos, isOpen = false, setOpen = null }) => {
   let initialBreakpoint = 0;
   let props = {};
   if (Capacitor.isNativePlatform()) {
@@ -30,9 +32,10 @@ export const Modal: React.FC<{
   function dismiss() {
     modal.current?.dismiss();
   }
+
   const { t } = useTranslation();
   return (
-    <IonModal ref={modal} id={id} trigger={trigger} {...props}>
+    <IonModal ref={modal} id={id} trigger={trigger} {...props} isOpen={isOpen}  onDidDismiss={()=> setOpen && setOpen(!isOpen)}>
       <IonHeader mode="ios" collapse="fade" class="ion-margin-top">
         <IonToolbar>
           <IonButtons slot="end">

@@ -58,7 +58,7 @@
   display: grid;
   border-radius: 5px;
   grid-template-columns: repeat(2, 1fr); /* Crea dos columnas con igual ancho */
-  gap: 5px; /* Espacio entre las tarjetas, ajústalo a tu gusto */
+  row-gap: 20px;
   margin: auto; /* Margen alrededor del contenedor, opcional */
   padding-top: 20px;
 }

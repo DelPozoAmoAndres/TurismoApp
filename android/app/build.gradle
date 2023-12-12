@@ -21,8 +21,9 @@ android {
         release {
             storeFile file('astour-release-key.keystore')
             storePassword System.getenv('KEYSTORE_PASSWORD')
-            keyAlias System.getenv('astour')
+            keyAlias System.getenv('KEY_ALIAS')
             keyPassword System.getenv('KEYSTORE_PASSWORD')
+        }
     }
 
     buildTypes {

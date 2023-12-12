@@ -23,7 +23,6 @@ export const ActivityList: React.FC<{
   const searchBar = React.useRef<HTMLIonSearchbarElement>(null);
 
   useEffect(() => {
-    console.log(searchBar)
     searchBar.current?.setFocus();
   }, [searchBar,items]);
   

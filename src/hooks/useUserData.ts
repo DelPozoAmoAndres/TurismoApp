@@ -4,7 +4,6 @@ import { getUser } from '@apis/adminUserApi';
 
 export const useUserData = (userId:string) => {
   const [user,setUser] = useState(new User());
-  console.log(user)
   useEffect(()=>{
     getUser(userId).then(data=>setUser(data))
   },[userId])

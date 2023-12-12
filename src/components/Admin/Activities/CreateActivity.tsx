@@ -38,8 +38,6 @@ const CreateActivity: React.FC<RouteComponentProps> = ({ history }) => {
     setShowAlert(true);
   };
 
-  console.log('Create', formData.petsPermited);
-
   return (
     <IonPage ref={page}>
       <IonHeader>

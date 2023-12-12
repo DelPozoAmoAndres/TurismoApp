@@ -15,28 +15,37 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
 
-    - name: Set up JDK 11
+    - name: Set up JDK 17
       uses: actions/setup-java@v2
       with:
-        java-version: '11'
+        java-version: '17'
         distribution: 'adopt'
 
-    - name: Go android folder
-      run: cd android
+    - name: Set up Capacitor Cordova
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+    
+    - name: Install dependencies
+      run: |
+        npm install 
+        npm install -g @ionic/cli native-run cordova-res
 
-    - name: Decode Keystore File
-      run: echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > my-release-key.keystore
-        
-    - name: Grant execute permission for gradlew
-      run: chmod +x ./gradlew
+    - name: Build Ionic App
+      run: npm run ionic:build 
+
+    - name: Sync and Copy Capacitor Assets
+      run: |
+        npx cap sync android
+        npx cap copy android
 
     - name: Build Release APK
-      run: ./gradlew assembleRelease
+      run: cd android && chmod +x ./gradlew && ./gradlew assembleRelease
       env:
         KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
 
     - name: Rename APK
-      run: mv ./app/build/outputs/apk/release/app-release.apk ./app/build/outputs/apk/release/${GITHUB_REF#refs/tags/}-release.apk
+      run: mv ./android/app/build/outputs/apk/release/app-release.apk ./android/app/build/outputs/apk/release/${GITHUB_REF#refs/tags/}-release.apk
 
     - name: Get the version
       id: get_version
@@ -59,6 +68,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./app/build/outputs/apk/release/${{ steps.get_version.outputs.VERSION }}-release.apk
+        asset_path: ./android/app/build/outputs/apk/release/${{ steps.get_version.outputs.VERSION }}-release.apk
         asset_name: ${{ steps.get_version.outputs.VERSION }}-release.apk
         asset_content_type: application/vnd.android.package-archive

@@ -54,8 +54,6 @@ const ActivityDetails: React.FC<ActivityDetailsProps> = ({ match, history }) => 
     setShowAlert(false);
   };
 
-  console.log('Details', formData?.petsPermited);
-
   return (
     <IonPage>
       <IonHeader>
