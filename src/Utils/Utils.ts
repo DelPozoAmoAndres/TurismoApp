@@ -2,7 +2,7 @@ const MAX_FILE_SIZE_KB = 100;
 const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_KB * 1024; 
 
 // Filtrar las propiedades que no sean null
-export const filterPropertiesNotNull = (data: any) => {
+const filterPropertiesNotNull = (data: any) => {
   const filteredData: any = {};
   Object.entries(data).forEach(([key, value]) => {
     if (value !== null) {
@@ -13,7 +13,7 @@ export const filterPropertiesNotNull = (data: any) => {
 };
 
 //Formatear fechas para inputs
-export const formatDate = (date: Date | null, showTime?: boolean): string => {
+const formatDate = (date: Date | null, showTime?: boolean): string => {
   if (!date) return '';
   date = new Date(date.toString());
   const year = date.getFullYear();
@@ -30,11 +30,11 @@ export const formatDate = (date: Date | null, showTime?: boolean): string => {
   return `${year}-${month}-${day}${time}`;
 };
 
-export const formatDateToTime = (date: Date | null): string => {
+const formatDateToTime = (date: Date | null): string => {
   return formatDate(date, true).split('T')[1];
 };
 
-export function getItem(key: string) {
+function getItem(key: string) {
   try {
     return localStorage.getItem(key);
   } catch (error: unknown) {
@@ -42,7 +42,7 @@ export function getItem(key: string) {
   }
 }
 
-export function setItem(key: string, item: string) {
+function setItem(key: string, item: string) {
   try {
     localStorage.setItem(key, item);
   } catch (error: unknown) {
@@ -50,7 +50,7 @@ export function setItem(key: string, item: string) {
   }
 }
 
-export function removeItem(key: string) {
+function removeItem(key: string) {
   try {
     localStorage.removeItem(key);
   } catch (error: unknown) {
@@ -58,7 +58,7 @@ export function removeItem(key: string) {
   }
 }
 
-export async function uploadImage(fr: FileReader, event: React.ChangeEvent<HTMLInputElement>, getImage: () => void) {
+async function uploadImage(fr: FileReader, event: React.ChangeEvent<HTMLInputElement>, getImage: () => void) {
   const files = event.target.files;
   if (files && files?.length > 0) {
     const process = async () => {
@@ -77,7 +77,7 @@ export async function uploadImage(fr: FileReader, event: React.ChangeEvent<HTMLI
   }
 }
 
-export async function optimizeImage(fr: FileReader, file: File) {
+async function optimizeImage(fr: FileReader, file: File) {
   return new Promise<string>((resolve, reject) => {
     const img = new Image();
     img.onload = () => {
@@ -112,3 +112,5 @@ export async function optimizeImage(fr: FileReader, file: File) {
     img.src = URL.createObjectURL(file);
   });
 }
+
+export { filterPropertiesNotNull, formatDate, formatDateToTime, getItem, setItem, removeItem, uploadImage };
