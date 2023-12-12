@@ -33,7 +33,7 @@ jobs:
         npm install -g @ionic/cli native-run cordova-res
 
     - name: Build Ionic App
-      run: npm run ionic:serve
+      run: npm run ionic:build 
 
     - name: Sync and Copy Capacitor Assets
       run: |
