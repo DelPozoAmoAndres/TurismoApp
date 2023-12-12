@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { User } from '@models/User';
-import { filterPropertiesNotNull } from '@utils/Utils';
+// import { filterPropertiesNotNull } from '@form-utils/Utils';
 
 const baseUrl = `${process.env.REACT_APP_API_URL}/admin1/user`;
 
 export const getUserList = async (searchString: string, filters: Record<string, unknown>): Promise<[]> => {
-    filters = filterPropertiesNotNull(filters);
+    // filters = filterPropertiesNotNull(filters);
     const params = new URLSearchParams({ searchString, ...filters }).toString();
     return axios.get(`${baseUrl}/list?${params}`).then((res) => res.data);
 };

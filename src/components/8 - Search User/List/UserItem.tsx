@@ -4,7 +4,7 @@ import { useAuth } from '@contexts/AuthContexts';
 import { useScreen } from '@hooks/useScreen';
 import { IonAlert, IonButton, IonCard, IonCardContent, IonCardSubtitle, IonCardTitle, IonIcon, IonItem, IonText } from '@ionic/react';
 import { Role, User } from '@models/User';
-import { formatDate } from '@utils/Utils';
+// import { formatDate } from '@form-utils/Utils';
 import { pencilOutline, trashOutline } from 'ionicons/icons';
 import { deleteUser } from '@apis/adminUserApi';
 import { UserModal } from '@search-user/Edit Modal/UserModal';
@@ -20,7 +20,7 @@ export const UserItem : React.FC<{ user: User}> = ({ user }) => {
         <IonCardTitle>{user.name}</IonCardTitle>
         <IonCardSubtitle>
           <IonText className="ion-margin-left">{user.email}</IonText>
-          <IonText className="ion-margin-left">{formatDate(user.birthday||null)}</IonText>
+          {/* <IonText className="ion-margin-left">{formatDate(user.birthday||null)}</IonText> */}
         </IonCardSubtitle>
         <IonCardContent class="ion-no-padding">
             <div hidden={!(auth.user?.role === Role.administrador && !isMobile)}>

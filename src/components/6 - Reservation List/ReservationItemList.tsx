@@ -4,7 +4,7 @@ import { IonButton, IonCardContent, IonCardSubtitle, IonItem, IonLabel, IonList,
 /* Models */
 import { Reservation } from '@models/Reservation';
 /* Utils */
-import { formatDate } from '@utils/Utils';
+// import { formatDate } from '@form-utils/Utils';
 /* i18n */
 import { useTranslation } from 'react-i18next';
 
@@ -28,7 +28,7 @@ export const ReservationItemList: React.FC<{
           <IonLabel>
             <strong>{reservation.activity?.name.toString()}</strong>
           </IonLabel>
-          <IonText>{formatDate(reservation.event?.date || null, true)}</IonText>
+          {/* <IonText>{formatDate(reservation.event?.date || null, true)}</IonText> */}
           <IonText>{reservation.numPersons.toString()} personas</IonText>
           <IonRow class="ion-justify-content-between ion-align-items-center">
             <IonText>Total: {Number(reservation.event?.price) * Number(reservation.numPersons)}€</IonText>

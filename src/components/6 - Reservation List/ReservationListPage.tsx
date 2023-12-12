@@ -8,7 +8,7 @@ import { useReservationList } from '@hooks/useReservationList';
 import { AppPage } from '@pages/AppPage';
 import { ReservationItemList } from '@reservation-list/ReservationItemList';
 /* Utils */
-import { formatDate } from '@utils/Utils';
+// import { formatDate } from '@form-utils/Utils';
 /* Style */
 import "./ReservationList.css";
 /* i18n */
@@ -38,7 +38,7 @@ const ReservationListPage: React.FC = () => {
             <div key={'reservationsGroup' + index} className="ion-margin-bottom">
               <IonRow class="ion-padding-start ion-padding-vertical">
                 <IonLabel>
-                  <strong>{formatDate(reservationGroup.dateFrom)} <IonIcon icon={ellipsisHorizontal} style={{"opacity":0.5, "margin-bottom":"-2.5px"}}/> {formatDate(reservationGroup.dateTo)}</strong>
+                  {/* <strong>{formatDate(reservationGroup.dateFrom)} <IonIcon icon={ellipsisHorizontal} style={{"opacity":0.5, "margin-bottom":"-2.5px"}}/> {formatDate(reservationGroup.dateTo)}</strong> */}
                 </IonLabel>
               </IonRow>
               <IonCard>

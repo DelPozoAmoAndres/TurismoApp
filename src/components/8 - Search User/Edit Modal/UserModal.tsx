@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useEdit } from '@hooks/useEdit';
 import { Modal } from '@shared/Modal';
 import { IonAlert, IonButton, IonGrid, IonInput, IonItem, IonLabel, IonRow, IonSegment, IonSegmentButton } from '@ionic/react';
-import { formatDate } from '@utils/Utils';
+// import { formatDate } from '@form-utils/Utils';
 import { editProfile } from '@apis/userApi';
 import { editUser, registerUser } from '@apis/adminUserApi';
 import { useAuth } from '@contexts/AuthContexts';
@@ -56,7 +56,7 @@ export const UserModal: React.FC<{ user: User, action: "add" | "edit" }> = ({ us
           </IonItem>
           <IonItem>
             <IonInput
-              value={formatDate(formData?.birthday || null)}
+              // value={formatDate(formData?.birthday || null)}
               label="Fecha de nacimiento"
               type='date'
               labelPlacement="stacked"

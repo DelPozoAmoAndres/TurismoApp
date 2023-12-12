@@ -6,7 +6,7 @@ import { starOutline } from 'ionicons/icons';
 import { Review } from '@models/Activity';
 import { Role } from '@models/User';
 /* Utils */
-import { formatDate } from '@utils/Utils';
+// import { formatDate } from '@form-utils/Utils';
 /* Contexts */
 import { useAuth } from '@contexts/AuthContexts';
 /* Styles */
@@ -28,7 +28,7 @@ export const ReviewItem: React.FC<{ comment: Review }> = ({ comment }) => {
                         <strong>{comment.authorName}</strong>
                     </IonLabel>
                     <section>
-                        <IonLabel>{formatDate(comment.date)}</IonLabel>
+                        {/* <IonLabel>{formatDate(comment.date)}</IonLabel> */}
                         <IonLabel>
                             {comment.score}/5 <IonIcon icon={starOutline} />
                         </IonLabel>

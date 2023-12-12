@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { IonAlert, IonButton, IonDatetime, IonInput, IonItem, IonLabel, IonList, IonSelect, IonSelectOption } from '@ionic/react';
 import { Event } from '@models/Activity';
 import { useEdit } from '@hooks/useEdit';
-import { filterPropertiesNotNull, formatDate } from '@utils/Utils';
+// import { filterPropertiesNotNull, formatDate } from '@form-utils/Utils';
 import { Role, User } from '@models/User';
 import { getUserList } from '@apis/adminUserApi';
 import { createEvent } from '@apis/adminActivityApi';
@@ -28,17 +28,17 @@ export const EventModal: React.FC<{ activityId: string, event: Event, action: "a
     }, []);
 
     const handleAddEvent = () => {
-        formData && createEvent(
-            activityId,
-            formData,
-            filterPropertiesNotNull({
-                repeatDays,
-                repeatType,
-                repeatStartDate,
-                repeatEndDate,
-                time,
-            })
-        );
+        // formData && createEvent(
+        //     activityId,
+        //     formData,
+        //     filterPropertiesNotNull({
+        //         repeatDays,
+        //         repeatType,
+        //         repeatStartDate,
+        //         repeatEndDate,
+        //         time,
+        //     })
+        // );
     };
 
     const handleRepeatTypeChange = (e: CustomEvent) => {
@@ -148,7 +148,7 @@ export const EventModal: React.FC<{ activityId: string, event: Event, action: "a
                         <IonLabel position="stacked">Día</IonLabel>
                         <IonInput
                             type="datetime-local"
-                            value={formData && formatDate(formData?.date, true)}
+                            // value={formData && formatDate(formData?.date, true)}
                             onIonChange={(e) => {
                                 formData &&
                                 setFormData({

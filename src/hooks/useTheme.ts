@@ -1,5 +1,5 @@
 import { Capacitor } from '@capacitor/core';
-import { getItem } from '@utils/Utils';
+// import { getItem } from '@form-utils/Utils';
 import { StatusBar, Style } from '@capacitor/status-bar';
 
 const setStatusBarStyleDark = async () => {
@@ -21,7 +21,9 @@ const setStatusBarStyleLight = async () => {
 };
 
 export const useTheme = () => {
-  const theme = getItem('theme');
+  // const theme = getItem('theme');
+  const theme = null;
+
   if (theme) {
     document.body.classList.toggle(theme, true);
     if (Capacitor.isNativePlatform()) {

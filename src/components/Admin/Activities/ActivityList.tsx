@@ -15,7 +15,7 @@ import {
   IonInput,
 } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
-import { searchValidation } from '@utils/Validations';
+//  import { searchValidation } from '@form-utils/Validations';
 import { Activity, ActivityFilter, ActivityState } from '@models/Activity';
 import { getActivityList } from '@apis/activityApi';
 
@@ -30,7 +30,7 @@ const ActivityList: React.FC<RouteComponentProps> = ({ history }) => {
   }, [searchText, filters]);
 
   const search = (searchText: string, filters: ActivityFilter) => {
-    if (searchValidation(searchText)) getActivityList(searchText, filters).then((activities) => setActivities(activities));
+    // if (searchValidation(searchText)) getActivityList(searchText, filters).then((activities) => setActivities(activities));
   };
 
   const handleSearch = (e: CustomEvent) => {

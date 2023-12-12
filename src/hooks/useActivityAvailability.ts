@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getEvents } from '../apis/activityApi';
-import { formatDate } from '@utils/Utils';
+// import { formatDate } from '@form-utils/Utils';
 import { Event } from '../models/Activity';
 
 export const useActivityAvailability = (activityId: string) => {
@@ -14,10 +14,10 @@ export const useActivityAvailability = (activityId: string) => {
     //Method to handle when de date selected in the calendar change
     setSelectedDate(date);
     setSelectedEvent(null);
-    const selectedEvents = events?.filter((event) => formatDate(event.date) === formatDate(date));
-    if (selectedEvents) {
-      setSelectedEvents(selectedEvents);
-    }
+    // const selectedEvents = events?.filter((event) => formatDate(event.date) === formatDate(date));
+    // if (selectedEvents) {
+    //   setSelectedEvents(selectedEvents);
+    // }
   };
 
   useEffect(() => {
@@ -29,13 +29,13 @@ export const useActivityAvailability = (activityId: string) => {
         textColor: string;
         backgroundColor: string;
       }[] = [];
-      events.forEach((event) =>
-        days.push({
-          date: formatDate(event.date),
-          textColor: 'white',
-          backgroundColor: '#B37FD9',
-        })
-      );
+      // events.forEach((event) =>
+      //   days.push({
+      //     date: formatDate(event.date),
+      //     textColor: 'white',
+      //     backgroundColor: '#B37FD9',
+      //   })
+      // );
       setHighlightedDates(days);
     });
   }, [activityId]);

@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { AuthContextType } from '@models/AuthContextType';
 import { User } from '@models/User';
 import { RegisterFormData } from '@models/User';
-import { getItem, removeItem, setItem } from '@utils/Utils';
+// import { getItem, removeItem, setItem } from '@form-utils/Utils';
 import { useIonRouter } from '@ionic/react';
 import Login from '@components/4 - Personal Area/Login/Login';
 
@@ -32,7 +32,9 @@ interface Props {
 }
 
 const AuthProvider: React.FC<Props> = (props) => {
-  const [token, setToken] = useState<string | null>(getItem('token'));
+  const [token, setToken] = useState<string | null>(""
+    // getItem('token')
+    );
   const [user, setUser] = useState<User | null>(null);
   const [showLoginModal, setShowLoginModal] = useState(false);
 
@@ -57,14 +59,14 @@ const AuthProvider: React.FC<Props> = (props) => {
   };
 
   const login = async (email: string, password: string) => {
-    if (getItem('i18nextLng') == null) throw new Error('Debes de activar las cookies para poder iniciar sesión');
+    // if (getItem('i18nextLng') == null) throw new Error('Debes de activar las cookies para poder iniciar sesión');
     return axios
       .post(process.env.REACT_APP_API_URL + '/login', { email, password })
       .then((response) => {
         if (response.status === HttpStatusCode.Ok) {
           setUser(response.data.user);
-          setToken(response.data.token);
-          setItem('token', response.data.token);
+          // setToken(response.data.token);
+          // setItem('token', response.data.token);
         } else throw new Error(response.data.message);
       })
       .catch((error) => {
@@ -77,13 +79,14 @@ const AuthProvider: React.FC<Props> = (props) => {
   const logout = () => {
     setUser(null);
     setToken(null);
-    removeItem('token');
+    // removeItem('token');
   };
 
   useEffect(() => {
     const handleToken = () => {
-      const token = getItem('token');
-      setToken(token);
+      // const token = getItem('token');
+      // setToken(token);
+      const token= null
       if (token) {
         axios
           .get(process.env.REACT_APP_API_URL + '/user')

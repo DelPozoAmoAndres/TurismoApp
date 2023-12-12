@@ -3,7 +3,7 @@ import { IonPage, IonContent, IonButton, IonHeader, IonToolbar, IonTitle, IonLis
 import { RouteComponentProps } from 'react-router';
 import { deleteUser, editUser, getUser } from '@apis/adminUserApi'; // Importa los métodos para obtener información del usuario y las reservas
 import { User } from '@models/User';
-import { formatDate } from '@utils/Utils';
+// import { formatDate } from '@form-utils/Utils';
 
 type UserDetailsProps = RouteComponentProps<{ id: string }>;
 
@@ -102,7 +102,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ match, history }) => {
           <IonItem disabled={!isEditModeActive}>
             <IonInput
               type="date"
-              value={formatDate(formData?.birthday || null)}
+              // value={formatDate(formData?.birthday || null)}
               label="Fecha de nacimiento"
               labelPlacement="stacked"
               onIonChange={(e) =>
@@ -117,7 +117,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ match, history }) => {
           <IonItem disabled={!isEditModeActive}>
             <IonInput
               type="date"
-              value={formatDate(formData?.createdAt || null)}
+              // value={formatDate(formData?.createdAt || null)}
               label="Cuenta creada"
               labelPlacement="stacked"
               onIonChange={(e) =>
@@ -132,7 +132,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ match, history }) => {
           <IonItem disabled={!isEditModeActive}>
             <IonInput
               type="date"
-              value={formatDate(formData?.updatedAt || null)}
+              // value={formatDate(formData?.updatedAt || null)}
               label="Cuenta actualizada"
               labelPlacement="stacked"
               onIonChange={(e) =>

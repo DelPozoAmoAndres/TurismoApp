@@ -64,6 +64,7 @@ export async function uploadImage(fr: FileReader, event: React.ChangeEvent<HTMLI
     const process = async () => {
       fr.removeEventListener("load", process);
       const file = files[0]
+      console.log(file.size)
       if (file && file.size > MAX_FILE_SIZE_BYTES) {
         //FIXME: Mostrar mensaje de error
         alert(`El archivo es demasiado grande. El tamaño máximo permitido es de ${MAX_FILE_SIZE_KB}MB.`);
