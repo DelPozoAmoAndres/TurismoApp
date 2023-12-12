@@ -6,7 +6,7 @@ import { starOutline } from 'ionicons/icons';
 import { Review } from '@models/Activity';
 import { Role } from '@models/User';
 /* Utils */
-import { formatDate } from '@utils/utils';
+import { formatDate } from '@utils/Utils';
 /* Contexts */
 import { useAuth } from '@contexts/AuthContexts';
 /* Styles */

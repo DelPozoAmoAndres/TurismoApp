@@ -1,5 +1,5 @@
 import { Capacitor } from '@capacitor/core';
-import { getItem } from '../utils/utils';
+import { getItem } from '@utils/Utils';
 import { StatusBar, Style } from '@capacitor/status-bar';
 
 const setStatusBarStyleDark = async () => {

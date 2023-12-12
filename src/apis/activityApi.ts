@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { filterPropertiesNotNull } from '@utils/utils';
+import { filterPropertiesNotNull } from '@utils/Utils';
 import { Activity, ActivityFilter, Event } from '@models/Activity';
 
 const baseUrl = `${process.env.REACT_APP_API_URL}/activity`;

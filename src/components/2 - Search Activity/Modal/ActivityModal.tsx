@@ -10,7 +10,7 @@ import { Activity, ActivityState } from '@models/Activity';
 /* Styles */
 import "./ActivityModal.css";
 /* Utils */
-import { uploadImage } from '@utils/utils';
+import { uploadImage } from '@utils/Utils';
 /* Apis */
 import { createActivity, editActivity } from '@apis/adminActivityApi';
 /* i18n */

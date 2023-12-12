@@ -3,7 +3,7 @@ import { IonItem, IonLabel, IonInput, IonButton, IonSelect, IonSelectOption, Ion
 import { Role, User } from '@models/User';
 import { getUserList } from '@apis/adminUserApi';
 import { Event } from '@models/Activity';
-import { filterPropertiesNotNull, formatDate } from '@utils/utils';
+import { filterPropertiesNotNull, formatDate } from '@utils/Utils';
 import { createEvent } from '@apis/adminActivityApi';
 import { useLanguage } from '@hooks/useLanguage';
 

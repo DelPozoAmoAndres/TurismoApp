@@ -4,7 +4,7 @@ import { PersonalData } from '@personal-area/Profile/PersonalData';
 import { Account } from '@personal-area/Profile/Account';
 import { useAuth } from '@contexts/AuthContexts';
 import { useTranslation } from 'react-i18next';
-import { formatDate } from '@utils/utils';
+import { formatDate } from '@utils/Utils';
 import { bookOutline, shieldOutline } from 'ionicons/icons';
 import { useScreen } from '@hooks/useScreen';
 import { AppPage } from '@pages/AppPage';

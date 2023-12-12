@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { User } from '@models/User';
-import { filterPropertiesNotNull } from '@utils/utils';
+import { filterPropertiesNotNull } from '@utils/Utils';
 
 const baseUrl = `${process.env.REACT_APP_API_URL}/admin1/user`;
 

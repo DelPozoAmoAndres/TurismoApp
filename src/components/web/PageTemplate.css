@@ -35,7 +35,7 @@ ion-footer {
   margin: 0;
 }
 
-.pageWeb ion-content > div{
+#pageWeb ion-content > div{
   display: grid;
   grid-template-rows: auto 1fr auto; 
   min-height: 100vh;

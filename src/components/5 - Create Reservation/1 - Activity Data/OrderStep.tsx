@@ -2,7 +2,7 @@ import React from 'react';
 /* Ionic Components */
 import { IonButton, IonCardSubtitle, IonCardTitle, IonCol, IonLabel, IonRow, IonTitle } from '@ionic/react';
 /* Utils */
-import { formatDate } from '@utils/utils';
+import { formatDate } from '@utils/Utils';
 /* Contexts */
 import { useReservation } from '@contexts/ReservationContext';
 /* i18n */

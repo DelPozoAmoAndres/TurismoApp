@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { IonAlert, IonButton, IonDatetime, IonInput, IonItem, IonLabel, IonList, IonSelect, IonSelectOption } from '@ionic/react';
 import { Event } from '@models/Activity';
 import { useEdit } from '@hooks/useEdit';
-import { filterPropertiesNotNull, formatDate } from '@utils/utils';
+import { filterPropertiesNotNull, formatDate } from '@utils/Utils';
 import { Role, User } from '@models/User';
 import { getUserList } from '@apis/adminUserApi';
 import { createEvent } from '@apis/adminActivityApi';

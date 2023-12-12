@@ -4,7 +4,7 @@ import { useAuth } from '@contexts/AuthContexts';
 import { useScreen } from '@hooks/useScreen';
 import { IonAlert, IonButton, IonCard, IonCardContent, IonCardSubtitle, IonCardTitle, IonIcon, IonItem, IonText } from '@ionic/react';
 import { Role, User } from '@models/User';
-import { formatDate } from '@utils/utils';
+import { formatDate } from '@utils/Utils';
 import { pencilOutline, trashOutline } from 'ionicons/icons';
 import { deleteUser } from '@apis/adminUserApi';
 import { UserModal } from '@search-user/Edit Modal/UserModal';

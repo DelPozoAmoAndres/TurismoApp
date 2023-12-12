@@ -4,7 +4,7 @@ import { IonButton, IonCardContent, IonCardSubtitle, IonItem, IonLabel, IonList,
 /* Models */
 import { Reservation } from '@models/Reservation';
 /* Utils */
-import { formatDate } from '@utils/utils';
+import { formatDate } from '@utils/Utils';
 /* i18n */
 import { useTranslation } from 'react-i18next';
 
