@@ -5,7 +5,7 @@ import { IonItem, IonButton, IonAlert, IonGrid } from '@ionic/react';
 import Spinner from '@shared/Spinner';
 import { Field } from '@shared/Field';
 /* Utils */
-import { dateValidation, emailValidation, lengthValidation, telephoneValidation } from '@form-utils/Validations';
+// import { dateValidation, emailValidation, lengthValidation, telephoneValidation } from '@form-utils/Validations';
 // import { formatDate } from '@form-utils/Utils';
 /* Hooks */
 import { useRegister } from '@hooks/useRegister';
@@ -35,7 +35,7 @@ const Register: React.FC<RegisterProps> = ({loginModal}) => {
               placeholder={t('personal.data.name.placeholder')}
               type="text"
               onIonInput={(e) => setFormData({ ...formData, name: e.detail.value })}
-              validationFn={(e) => lengthValidation(8, e)}
+              validationFn={() => true}
               value={formData.name}
             />
           </IonItem>
@@ -46,7 +46,7 @@ const Register: React.FC<RegisterProps> = ({loginModal}) => {
               placeholder={t('personal.data.email.placeholder')}
               type="email"
               onIonInput={(e) => setFormData({ ...formData, email: e.detail.value })}
-              validationFn={emailValidation}
+              validationFn={() => true}
               value={formData.email}
             />
           </IonItem>
@@ -57,7 +57,7 @@ const Register: React.FC<RegisterProps> = ({loginModal}) => {
               placeholder={t('personal.data.telephone.placeholder')}
               type="tel"
               onIonInput={(e) => setFormData({ ...formData, telephone: e.detail.value })}
-              validationFn={telephoneValidation}
+              validationFn={() => true}
               value={formData.telephone ? String(formData.telephone) : ''}
             />
           </IonItem>
@@ -66,7 +66,7 @@ const Register: React.FC<RegisterProps> = ({loginModal}) => {
               label={t('personal.data.birthday')}
               errorText={t('personal.data.birthday.error')}
               placeholder={t('personal.data.birthday.placeholder')}
-              validationFn={dateValidation}
+              validationFn={()=>true}
               type="date"
               onIonInput={(e) => {
                 setFormData({ ...formData, birthday: new Date(e.detail.value) });
